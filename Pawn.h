@@ -9,8 +9,7 @@ class Pawn : public Piece {
         Pawn(int color);
         ~Pawn();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
-        void uniqStat();
-        bool currUniqStat();
+        void Promoted();
 };
 
 #endif
