@@ -28,5 +28,6 @@ public:
     bool getResign(); // returns resign
 
 };
+
 #endif
 
