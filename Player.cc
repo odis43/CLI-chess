@@ -29,3 +29,4 @@ bool Player::own(Piece *piece) {
 int Player::getSide() { return side; }
 
 bool Player::getResign() { return resign; }
+
