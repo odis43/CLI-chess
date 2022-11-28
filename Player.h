@@ -18,6 +18,7 @@ private:
 
 public:
     Player(int side);
+    virtual ~Player();
     
     void addPiece(Piece *); // adds pieces
     //void removePiece(Piece *); // removes pieces
