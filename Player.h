@@ -2,7 +2,6 @@
 #define _PLAYER_H_
 
 #include <vector>
-#include <memory>
 
 class Piece;
 class Board;
