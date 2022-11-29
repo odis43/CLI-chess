@@ -17,8 +17,8 @@ private:
     virtual std::vector<int> moveCreate() = 0; // function to move player piece
 
 public:
-    Player(std::string colour);
-    virtual ~Player();
+    Player(std::string colour); // constructor
+    virtual ~Player(); // destructor
     
     void addPiece(Piece *); // adds pieces
     void removePiece(Piece *); // removes pieces
