@@ -3,6 +3,7 @@
 
 //#include "Piece.h"
 #include "Pawn.h"
+#include "Tile.h"
 
 using namespace std;
 

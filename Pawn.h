@@ -1,6 +1,7 @@
 #ifndef PAWN
 #define PAWN
 
+#include "Tile.h"
 class Pawn : public Piece {
     bool isPromoted;
     bool hasTwoStepped;
