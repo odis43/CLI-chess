@@ -3,6 +3,7 @@
 
 #include <map>
 #include <vector>
+#include "Piece.h"
 
 
 class Piece;

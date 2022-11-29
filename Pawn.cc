@@ -2,47 +2,72 @@
 #define PAWN
 
 //#include "Piece.h"
-
-class Pawn : public Piece {
-    bool isPromoted;
-    public:
-        Pawn(int color);
-        ~Pawn();
-        void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
-        bool Promoted();
-        void print();
-};
-
-#endif
-
-
 #include "Pawn.h"
 
 using namespace std;
 
-Pawn::Pawn(int color):Piece{color, 1},color{color},isPromoted{false}{};
+Pawn::Pawn(string color):Piece{color, 1},color{color},isPromoted{false},hasTwoStepped{false}{}
 Pawn::~Pawn(){}
+
 void Pawn::genMove(int row, int col, vector<vector<Tile*>> board, Tile *tile) {
+    //for two step
+    if(getNotMoved == true) {
+        int newRow = row - 2;
+        if(getColour() == "white") {
+            newRow = row + 2;
+        }
+
+        if(newRow < 8 && newRow >= 0) {
+            Piece *tilePiece = board[newRow][col]->getPiece();
+            if(!tilePiece) {
+                updateValidMoves(board[newRow][col],4);
+            }
+        }
+    } else {
+        int newRow = row - 1;
+        if(getColour() == "white") {
+            newRow = row + 1;
+        }
+
+        if(row - 1 >= 0 && row + 1 < 8){
+            Piece *tilePiece = board[newRow][col]->getPiece();
+            if(!tilePiece) {
+                updateValidMoves(board[newRow][col], 1);
+            }
+            int newColLeft = col - 1;
+            int newColRight = col + 1;
+
+            if(newColLeft >= 0) {
+                Piece *tilePieceTwo = board[newRow][newColLeft]->getPiece();
+                if(tilePieceTwo != nullptr && tilePieceTwo->getColour() != this->getColour()){
+                    updateValidMoves(board[newRow][newColLeft],2);
+                }
+            }
+
+            if(newColRight < 8) {
+                Piece *tilePieceThree = board[newRow][newColRight]->getPiece();
+                if(tilePieceThree != nullptr && tilePieceThree->getColour() != this->getColour()){
+                    updateValidMoves(board[newRow][newColRight], 2);
+                }
+            }
+        }
+    }
 
 }
 
-void Pawn::Promoted() {
-    return isPromoted;
+bool Pawn::getStatus() {
+    return isPromoted && hasTwoStepped;
+}
+
+void Pawn::setStatus() {
+    isPromoted = !isPromoted;
+    hasTwoStepped = !hasTwoStepped;
 }
 
 void Pawm::print() {
-    if(this->getColor()){
+    if(this->getColor() == "black"){
         cout << "p";
     } else {
         cout << "P";
     }
-}
-
-void Pawn::genMove(int row, int col, vector<vector<Tile*>> board, Tile *tile) {
-    int newRow = this->row - 1;
-    if(getColor()){
-        newRow = this->row + 1;
-    }
-
-    if()
 }

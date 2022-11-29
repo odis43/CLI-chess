@@ -1,15 +1,15 @@
 #ifndef PAWN
 #define PAWN
 
-//#include "Piece.h"
-
 class Pawn : public Piece {
     bool isPromoted;
+    bool hasTwoStepped;
     public:
-        Pawn(int color);
+        Pawn(string std::color);
         ~Pawn();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
-        void Promoted();
+        void setStatus();
+        bool getStatus();
 };
 
 #endif

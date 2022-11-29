@@ -6,31 +6,6 @@
 #include <map>
 #include <vector>
 
-
-class Piece;
-
-//status 0: null, 1: white, 2: black;
-class Tile: public Observer {
-    int row, col, status;
-    Piece *piece;
-    std::vector<Piece*> all;
-    int status;
-    std::map<int,int> numThreats;
-public:
-    Tile(int row, int col);
-    ~Tile();
-    void set(Piece *piece);
-    void setAll(std::vector<Piece *> pieces);
-    void remove();
-    int getStat();
-    int getRow();
-    int getCol();
-    int getThreats(int p);
-    void notify();
-};
-
-#endif
-
 //threats not yet added in interface or implemented elsewhere 
 
 using namespace std;
@@ -71,5 +46,44 @@ int Tile::getThreats(int p) {
 }
 void Tile::notify() {
     //implementation to notify all pieces of cell changes
+    if(!piece) {
+        status = 0;
+    }
+
+    if(piece->getColour() == "black") {
+        status = 1;
+    }
+
+    if(piece->getColour() == "white"){
+        status = 2;
+    }
+
+    numThreats.clear();
+    for(auto piece: pieces) {
+        //check diag for white and black pawns
+
+        //diag black pawn
+        if(piece->getVal() == 1 && piece->getColour == "black"){
+            if (piece->getTile()->getRow() == this->row - 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
+                if(numThreats.count(1)) numThreats[1]++;
+                else numThreats[1] = 1;
+            }
+        }
+
+        if(piece->getVal() == 1 && piece->getColour == "white"){
+            if (piece->getTile()->getRow() == this->row + 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
+                if(numThreats.count(0)) numThreats[0]++;
+                else numThreats[0] = 0;
+            }
+        }
+
+        if(piece->isValidMove(this)) {
+            int curr = piece->getColour();
+
+            if(numThreats.count(curr)) numThreats[curr]++;
+            else numThreats[curr] = 1;
+        }
+        
+    }
 }
 
