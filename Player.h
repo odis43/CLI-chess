@@ -28,6 +28,8 @@ public:
     void setResign(bool resignInput); // sets current value of resign
     std::vector<int> move(); // activates moveCreate
 
+    // Return parameters
+
     Board *getBoard(); // returns board
     std::string getColour(); // returns colour
     bool getResign(); // returns resign
