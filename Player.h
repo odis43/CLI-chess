@@ -17,7 +17,7 @@ private:
     virtual std::vector<int> moveCreate() = 0; // function to move player piece
 
 public:
-    Player(int side);
+    Player(std::string colour);
     virtual ~Player();
     
     void addPiece(Piece *); // adds pieces
@@ -25,7 +25,7 @@ public:
     std::vector<Piece *> getPieces(); // returns pieces
     bool own(Piece *); // returns true if piece is owned by Player object
 
-    std::string getSide(); // returns side
+    std::string getColour(); // returns colour
     bool getResign(); // returns resign
 
 };
