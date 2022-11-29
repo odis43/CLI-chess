@@ -43,6 +43,11 @@ void Player::setResign(bool resignInput) {
     resign = resignInput;
 }
 
+// Activates moveCreate private method
+std::vector<int> Player::move() {
+    return moveCreate();
+}
+
 // Functions that return parameters
 
 Board *Player::getBoard() { return board; }

@@ -26,6 +26,7 @@ public:
     bool own(Piece *); // returns true if piece is owned by Player object
     void setBoard(Board *boardInput); // sets the current value of board
     void setResign(bool resignInput); // sets current value of resign
+    std::vector<int> move(); // activates moveCreate
 
     Board *getBoard(); // returns board
     std::string getColour(); // returns colour
