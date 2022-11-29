@@ -14,6 +14,7 @@ class Piece: public Subject {
     Tile *tile;
     string colour;
     int val;
+    bool notMoved;
     map<Tile*, int> validMoves;
     Board *board;
 
@@ -30,6 +31,10 @@ class Piece: public Subject {
         int getVal();
         int isValidMove(Tile* tile);
         map<Tile*, int>getValidMoves();
+        void createValidMoves();
+        void updateValidMoves(Tile *tile, int num);
+        void setNotMoved(bool b);
+        bool getNotMoved();
         Board *getBoard();
         void setBoard(Board *b);
         void notifyObservers();

@@ -36,6 +36,27 @@ int Piece::isValidMove(Tile *tile){
     }
 }
 
+void Piece::setNotMoved(bool b){
+    notMoved = b;
+}
+
+bool Piece::getNotMoved(){
+    return notMoved;
+}
+
 map<Tile*, int> Piece::getValidMoves(){
     return this->validMoves;
+}
+
+void Piece::createValidMoves(){
+    validMoves.clear();
+    vector<vector<Tile*>> curBoard = getBoard()->getBoardRef();
+    Tile *curTile = getTile();
+    int curRow = curTile->getRow();
+    int curCol = curTile->getCol();
+    genMoves(curBoard, curTile, curRow, curCol);
+}
+
+void Piece::updateValidMoves(Tile *tile, int num){
+    validMoves[tile] = num;
 }
