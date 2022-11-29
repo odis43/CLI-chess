@@ -15,18 +15,25 @@ void Player::addPiece(Piece *piece) {
 
 // Removes a piece from player's owned pieces
 void Player::removePiece(Piece *piece) {
-    pieces.emplace_back(piece);
+    for (auto it = pieces.begin(); it != pieces.end(); ++it) {
+        if (*it == piece) {
+            pieces.erase(it);
+            break;
+        }
+    }
 }
 
-
+// Returns true if a piece is owned by a player
 bool Player::own(Piece *piece) {
-    for (int i = 0; i < pieces.size(); i++) {
-        if (piece == pieces[i]) {
+    for (auto it = pieces.begin(); it != pieces.end(); ++it) {
+        if (*it == piece) {
             return true;
         }
     }
     return false;
 }
+
+// Functions that return parameters
 
 int Player::getColour() { return colour; }
 
