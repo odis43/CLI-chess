@@ -2,6 +2,7 @@
 #define KNIGHT
 
 //#include "Piece.h"
+#include "Tile.h"
 
 class Knight : public Piece {
     public:
