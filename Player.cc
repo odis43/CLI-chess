@@ -33,7 +33,14 @@ bool Player::own(Piece *piece) {
     return false;
 }
 
+// Sets value of game board
+void setBoard(Board *boardInput) {
+    board = boardInput;
+}
+
 // Functions that return parameters
+
+Board *Player::getBoard() { return board; }
 
 int Player::getColour() { return colour; }
 
