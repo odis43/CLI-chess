@@ -14,6 +14,6 @@ class Board: public Observer {
         Board();
         virtual ~Board() = 0;
         vector<vector<Tile*>> getBoardRef();
-}
+};
 
 #endif
