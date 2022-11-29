@@ -1,32 +1,41 @@
-#include "Player.h"
-
 #include <vector>
+#include "Player.h"
 #include "Piece.h"
 
-Player::Player(int side) : board{nullptr}, pieces{vector<Piece*>()}, side{side}, resign{false} {}
+// Constructor
+Player::Player(std::string colour) : board{nullptr}, pieces{vector<Piece*>()}, colour{colour}, resign{false} {}
 
+// Destructor
 Player::~Player() {}
 
+// Adds a piece to back of vector which holds Player's owned pieces
 void Player::addPiece(Piece *piece) {
     pieces.emplace_back(piece);
 }
 
-/*
+// Removes a piece from player's owned pieces
 void Player::removePiece(Piece *piece) {
-    pieces.emplace_back(piece);
+    for (auto it = pieces.begin(); it != pieces.end(); ++it) {
+        if (*it == piece) {
+            pieces.erase(it);
+            break;
+        }
+    }
 }
-*/
 
+// Returns true if a piece is owned by a player
 bool Player::own(Piece *piece) {
-    for (int i = 0; i < pieces.size(); i++) {
-        if (piece == pieces[i]) {
+    for (auto it = pieces.begin(); it != pieces.end(); ++it) {
+        if (*it == piece) {
             return true;
         }
     }
     return false;
 }
 
-int Player::getSide() { return side; }
+// Functions that return parameters
+
+int Player::getColour() { return colour; }
 
 bool Player::getResign() { return resign; }
 
