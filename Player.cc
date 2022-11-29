@@ -1,6 +1,5 @@
-#include "Player.h"
-
 #include <vector>
+#include "Player.h"
 #include "Piece.h"
 
 Player::Player(std::string colour) : board{nullptr}, pieces{vector<Piece*>()}, colour{colour}, resign{false} {}
