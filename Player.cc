@@ -3,7 +3,7 @@
 #include <vector>
 #include "Piece.h"
 
-Player::Player(int side) : board{nullptr}, pieces{vector<Piece*>()}, side{side}, resign{false} {}
+Player::Player(int side) : board{nullptr}, pieces{vector<Piece*>()}, colour{colour}, resign{false} {}
 
 Player::~Player() {}
 
@@ -26,7 +26,7 @@ bool Player::own(Piece *piece) {
     return false;
 }
 
-int Player::getSide() { return side; }
+int Player::getSide() { return colour; }
 
 bool Player::getResign() { return resign; }
 

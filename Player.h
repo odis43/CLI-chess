@@ -25,7 +25,7 @@ public:
     std::vector<Piece *> getPieces(); // returns pieces
     bool own(Piece *); // returns true if piece is owned by Player object
 
-    int getSide(); // returns side
+    std::string getSide(); // returns side
     bool getResign(); // returns resign
 
 };
