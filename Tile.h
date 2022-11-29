@@ -21,6 +21,7 @@ public:
     int getStat();
     int getRow();
     int getCol();
+    int getThreats(int player);
     void notify();
 };
 
