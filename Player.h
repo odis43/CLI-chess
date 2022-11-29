@@ -1,6 +1,7 @@
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
 
+#include <string>
 #include <vector>
 
 class Piece;
@@ -10,7 +11,7 @@ class Player {
 private:
     Board *board; // holds game board
     std::vector<Piece *> pieces; // holds pieces owned by player
-    int side; // (used to be called colour), side makes more sense for 4 player chess, also side is either 1, 2, 3, or 4.
+    std::string colour;
     bool resign; // true if player has resigned
 
     virtual std::vector<int> moveCreate() = 0; // function to move player piece
