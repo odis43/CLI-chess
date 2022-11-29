@@ -34,8 +34,13 @@ bool Player::own(Piece *piece) {
 }
 
 // Sets value of game board
-void setBoard(Board *boardInput) {
+void Player::setBoard(Board *boardInput) {
     board = boardInput;
+}
+
+// Sets value of resign
+void Player::setResign(bool resignInput) {
+    resign = resignInput;
 }
 
 // Functions that return parameters
