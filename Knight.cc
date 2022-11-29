@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Knight::Knight(string color):Piece{color,3}{}
+Knight::Knight(string colour):Piece{colour,3}{}
 
 Knight::~Knight(){}
 

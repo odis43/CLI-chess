@@ -3,13 +3,13 @@
 
 using namespace std;
 
-Rook::Rook(string color):Piece{color, 5}, {}
+Rook::Rook(string colour):Piece{colour, 5}, {}
 
 Rook::~Rook(){}
 
 void Rook::print() {
     if(getColour() == "white") cout << "R";
-    if(getColor() == "black") cout << "r";
+    if(getColour() == "black") cout << "r";
 }
 
  void moveUp(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {

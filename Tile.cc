@@ -9,12 +9,13 @@
 //threats not yet added in interface or implemented elsewhere 
 
 using namespace std;
-Tile::Tile(int row, int col):row{row},col{col},piece{nullptr},status{-1},numThreats{map<int, int>()}{}
+Tile::Tile(int row, int col):row{row},col{col},piece{nullptr},status{-1},numThreats{map<string, int>()}{}
 
 Tile::Tile(){}
 
 void Tile::set(Piece *piece) {
     this->piece = piece;
+
 }
 
 void Tile::setAll(vector<Piece *> pieces) {
@@ -37,8 +38,8 @@ int Tile::getCol() {
     return this->col;
 }
 
-int Tile::getThreats(int p) {
-    if(numthreats.count(p)) {
+int Tile::getThreats(string p) {
+    if(numThreats.count(p)) {
         return numThreats.at(p); //if there is a key for a threat (a color, white or black)
     } else {
         return 0; //no threats for this piece 
@@ -60,9 +61,6 @@ void Tile::notify() {
 
     numThreats.clear();
     for(auto piece: pieces) {
-        //check diag for white and black pawns
-
-        //diag black pawn
         if(piece->getVal() == 1 && piece->getColour == "black"){
             if (piece->getTile()->getRow() == this->row - 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
                 if(numThreats.count(1)) numThreats[1]++;

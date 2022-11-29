@@ -7,7 +7,7 @@
 
 class Rook : public Piece {
     public:
-        Rook(string color);
+        Rook(string colour);
         ~Rook();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void moveLeft(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);

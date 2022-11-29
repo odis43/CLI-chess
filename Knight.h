@@ -6,7 +6,7 @@
 
 class Knight : public Piece {
     public:
-        Knight(int color);
+        Knight(std::string colour);
         ~Knight();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
     
