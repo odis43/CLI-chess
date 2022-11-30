@@ -36,15 +36,16 @@ vector<int> Human::moveCreate() {
             iss >> initialPos; // reads second iss input into initalPos
             iss >> destinationPos; // reads third iss input into initalPos
 
-            int initialCol = intialPos[0] - 97; // converts col value into integer
             conversionTool << intialPos[1]; // read integer string into conversionTool
             conversionTool >> tempInt; // read conversionTool into tempInt, converting the string into integer value
             int initialRow = 8 - tempInt; // gets row value
+            int initialCol = intialPos[0] - 97; // converts col value into integer
+    
 
-            int destinationCol = destinationPos[0] - 97; // same as above but just with destinationPos
-            conversionTool << destinationPos[1];
+            conversionTool << destinationPos[1]; // same as above but just with destinationPos
             conversionTool >> tempInt;
             int destinationRow = 8 - tempInt;
+            int destinationCol = destinationPos[0] - 97;
 
             try {
 
