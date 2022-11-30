@@ -2,7 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <map>
+#include <stdexcept>
 #include "Human.h"
 #include "Tile.h"
 
