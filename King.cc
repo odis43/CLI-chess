@@ -86,9 +86,27 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
     vector<vector<Tile*>> board = getBoard()->getBoardRef();
     if (getNotMoved()) {
         if (getColour() == "white") {
-            
+            if (board[7][5]->getPiece() == nullptr && board[7][6]->getPiece() == nullptr && board[7][7]->getPiece()->getNotMoved()) {
+                if (board[7][5]->getThreats("black") == 0 && board[7][6]->getThreats("black") == 0) {
+                    updateValidMoves(board[7][6], 4);
+                }
+            }
+            if (board[7][1]->getPiece() == nullptr && board[7][2]->getPiece() == nullptr && board[7][3]->getPiece() == nullptr && board[7][0]->getPiece()->getNotMoved()) {
+                if (board[7][1]->getThreats("black") == 0 && board[7][2]->getThreats("black") == 0 && board[7][3]->getThreats("black") == 0) {
+                    updateValidMoves(board[7][6], 4);
+                }
+            }
         } else {
-            
+            if (board[0][5]->getPiece() == nullptr && board[0][6]->getPiece() == nullptr && board[0][7]->getPiece()->getNotMoved()) {
+                if (board[0][5]->getThreats("white") == 0 && board[0][6]->getThreats("white") == 0) {
+                    updateValidMoves(board[0][6], 4);
+                }
+            }
+            if (board[0][1]->getPiece() == nullptr && board[0][2]->getPiece() == nullptr && board[0][3]->getPiece() == nullptr && board[0][0]->getPiece()->getNotMoved()) {
+                if (board[0][1]->getThreats("white") == 0 && board[0][2]->getThreats("white") == 0 && board[0][3]->getThreats("white") == 0) {
+                    updateValidMoves(board[0][2], 4);
+                }
+            }
         }
     }
 }
