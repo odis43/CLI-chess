@@ -52,11 +52,12 @@ vector<int> Human::moveCreate() {
                 // Destination tile is the same as initial tile?
                 if (initialRow == destinationRow && initialCol == destinationCol) { throw out_of_range("Reason: Destination tile is same as initial tile"); }
 
-                Piece *testPiece = curBoard.at(initialRow).at(initialCol)->getPiece();
+                Piece *testInitial = curBoard.at(initialRow).at(initialCol)->getPiece();
+                Piece *testDestination = curBoard.at(initialRow).at(initialCol)->getPiece();
                 // No piece in initial tile?
-                if (testpiece == nullptr) { throw out_of_range("Reason: No piece located within initial tile"); } 
+                if (testInitial == nullptr) { throw out_of_range("Reason: No piece located within initial tile"); } 
                 // check if user even owns the piece
-                if (own(testPiece) == false) { throw out_of_range("Reason: You do not own that piece"); }
+                if (own(testDestination) == false) { throw out_of_range("Reason: You do not own that piece"); }
 
 
             } catch (out_of_range r) {
