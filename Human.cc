@@ -47,10 +47,20 @@ vector<int> Human::moveCreate() {
             int destinationRow = 8 - tempInt;
             int destinationCol = destinationPos[0] - 97;
 
+            // Exception Handling
             try {
+                // Destination tile is the same as initial tile?
+                if (initialRow == destinationRow && initialCol == destinationCol) { throw out_of_range("Reason: Destination tile is same as initial tile"); }
 
-            } catch {
+                Piece *testPiece = curBoard.at(initialRow).at(initialCol)->getPiece();
+                // No piece in initial tile?
+                if (testpiece == nullptr) { throw out_of_range("Reason: No piece located within initial tile"); } 
+                // check if user even owns the piece
+                if (own(testPiece) == false) { throw out_of_range("Reason: You do not own that piece"); }
 
+
+            } catch (out_of_range r) {
+                cerr << "Invalid Move. " << r.what() << endl;
             }
         } else {
             // if no valid move is provided
