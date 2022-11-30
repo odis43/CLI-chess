@@ -14,5 +14,25 @@ Human::~Human() {}
 
 vector<int> Human::moveCreate() {
     vector<vector<Tile *>> curBoard = getBoard()->getBoardRef();
+    string input;
+
+    while (getline(cin, input)) {
+        istringstream iss(input);
+        string cmd;
+        iss >> cmd;
+        
+        if (cmd == "resign") {
+            setResign(true);
+            return vector<int>{-1};
+        } else if (cmd == "move") {
+            string intialPos;
+            string destinationPos;
+
+            iss >> intialPos;
+            iss >> destinationPos;
+
+
+        }
+    }
 }
 
