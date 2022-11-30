@@ -32,7 +32,10 @@ vector<int> Human::moveCreate() {
             iss >> destinationPos;
 
 
+        } else {
+            cerr << "Invalid Move. Please use one of the following formats: 'resign', 'move [row][col] [row][col]'" << endl;
         }
     }
+    return vector<int>();
 }
 
