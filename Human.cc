@@ -1,6 +1,7 @@
+#include <string>
 #include "Human.h"
 
-Human::Human(int side) : Player{side} {}
+Human::Human(std::string colour) : Player{colour} {}
 
 Human::~Human() {}
 
