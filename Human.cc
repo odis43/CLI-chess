@@ -1,9 +1,18 @@
 #include <string>
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <map>
 #include "Human.h"
+#include "Tile.h"
 
-Human::Human(std::string colour) : Player{colour} {}
+using namespace std;
+
+Human::Human(string colour) : Player{colour} {}
 
 Human::~Human() {}
 
-std::vector<int> Human::moveCreate() {}
+vector<int> Human::moveCreate() {
+    vector<vector<Tile *>> curBoard = getBoard()->getBoardRef();
+}
 

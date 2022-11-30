@@ -2,8 +2,10 @@
 #include "Player.h"
 #include "Piece.h"
 
+using namespace std;
+
 // Constructor
-Player::Player(std::string colour) : board{nullptr}, pieces{vector<Piece*>()}, colour{colour}, resign{false} {}
+Player::Player(string colour) : board{nullptr}, pieces{vector<Piece*>()}, colour{colour}, resign{false} {}
 
 // Destructor
 Player::~Player() {}
@@ -44,7 +46,7 @@ void Player::setResign(bool resignInput) {
 }
 
 // Activates moveCreate private method
-std::vector<int> Player::move() {
+vector<int> Player::move() {
     return moveCreate();
 }
 
