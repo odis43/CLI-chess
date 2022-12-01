@@ -53,36 +53,36 @@ vector<int> Human::moveCreate() {
                 if (initialRow == destinationRow && initialCol == destinationCol) throw out_of_range("Reason: Destination tile is same as initial tile");
                 
                 // Acquire piece at initial tile
-                Piece *testInitial = curBoard.at(initialRow).at(initialCol)->getPiece();
+                Piece *currentPiece = curBoard.at(initialRow).at(initialCol)->getPiece();
                 // Acquire destination tile
                 Tile *testDestination = curBoard.at(destinationRow).at(destinationCol);
 
                 // No piece in initial tile?
-                if (testInitial == nullptr) throw out_of_range("Reason: No piece located within initial tile");
+                if (currentPiece == nullptr) throw out_of_range("Reason: No piece located within initial tile");
 
                 // Check if user even owns the piece
                 if (own(testDestination) == false) throw out_of_range("Reason: You do not own that piece");
                 
                 // Check if the ending destination is a valid move for the piece at initial tile
-                if (testInitial->isValidMove(testDestination) == 0) throw out_of_range("Reason: No valid moves lead there");
+                if (currentPiece->isValidMove(testDestination) == 0) throw out_of_range("Reason: No valid moves lead there");
 
                 // Now we actually move
                 // First, remove piece from initial tile
                 curBoard.at(initialRow).at(initialCol)->remove();
 
                 // Second, swap the pieces at initial tile and destination tile
-                Piece *capturedPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
-                curBoard.at(destinationRow).at(destinationCol)->setPiece(testInitial);
+                Piece *lastPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
+                curBoard.at(destinationRow).at(destinationCol)->setPiece(currentPiece);
 
                 // Third, modify applicable piece values after movement
-                testInitial->setTile(testDestination);
-                testInitial->setNotMoved(false);
+                currentPiece->setTile(testDestination);
+                currentPiece->setNotMoved(false);
 
                 // Fourth, check for an existing captured piece and respond accordingly
-                if (capturedPiece) {
-                    return vector<int>{capturedPiece->getVal(), testInitial->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                if (lastPiece) {
+                    return vector<int>{lastPiece->getVal(), currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
                 } else {
-                    return vector<int>{0, testInitial->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                    return vector<int>{0, currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
                 }
 
                 break;
