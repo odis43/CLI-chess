@@ -14,7 +14,7 @@ private:
     std::string colour; // either "black" or "white"
     bool resign; // true if player has resigned
 
-    virtual std::vector<int> moveCreate() = 0; // function to move player piece
+    virtual std::vector<int> moveCreate() = 0; // creates move
 
 public:
     Player(std::string colour); // constructor
@@ -33,7 +33,6 @@ public:
     Board *getBoard(); // returns board
     std::string getColour(); // returns colour
     bool getResign(); // returns resign
-
 };
 
 #endif

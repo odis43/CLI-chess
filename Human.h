@@ -7,11 +7,10 @@
 
 class Human : public Player {
 public:
-    Human(std::string colour);
-    ~Human();
+    Human(std::string colour); // constructor
+    ~Human(); // destructor
 
-    std::vector<int> moveCreate() override;
-
+    std::vector<int> moveCreate() override; // creates move
 };
 
 #endif

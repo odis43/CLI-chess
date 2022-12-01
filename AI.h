@@ -7,11 +7,10 @@
 
 class AI : public Player {
 public:
-    AI(std::string colour);
-    ~AI();
+    AI(std::string colour); // constructor
+    ~AI(); // destructor
 
-    virtual std::vector<int> moveCreate() = 0;
-
+    virtual std::vector<int> moveCreate() = 0; // creates move
 };
 
 #endif
