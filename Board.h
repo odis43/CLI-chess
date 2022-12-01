@@ -22,15 +22,17 @@ class Board: public Observer {
     //Pieces in game
     vector<unique_ptr<Piece>> thePieces;
     //Players
-    vector<unique_ptr<Player>> players;
+    vector<unique_ptr<Player>> thePlayers;
     //Previous moves
     vector<unique_ptr<Move>> prevMoves;
     //Tracks number of rounds
     int round;
     //Tracks who's turn 
-    int playerTurn;
+    string playerTurn;
     //Tracks if the game is in play
     bool inPlay;
+    //Text Display
+    unique_ptr<TextDisplay> theTextDisplay;
     //Maps the player to their score
     map<string, int> score;
     //Resets the board
@@ -48,8 +50,7 @@ class Board: public Observer {
         void setBoard(int row, int col);
         void setPiece(int row, int col, Piece *piece);
         Piece *getPiece(string colour, string name);
-        void removePiece(int row, int col);
-        vector<Piece*> getRefPieces();
+        vector<Piece*> getPiecesRef();
         void addPlayer(Player *player);
         Player *getPlayer(int num);
         void updateScore(string name);
@@ -66,7 +67,6 @@ class Board: public Observer {
         bool resign();
         virtual void setup() = 0;
         void run(vector<string> playerNames, bool canUndo);
-        void undo();
         TextDisplay *getTextDisplay();
         virtual void notify() = 0;
 };
