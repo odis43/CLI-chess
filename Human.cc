@@ -78,7 +78,14 @@ vector<int> Human::moveCreate() {
                 testInitial->setTile(testDestination);
                 testInitial->setNotMoved(false);
 
+                // Fourth, check for an existing captured piece and respond accordingly
+                if (capturedPiece) {
+                    return vector<int>{capturedPiece->getVal(), testInitial->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                } else {
+                    return vector<int>{0, testInitial->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                }
 
+                break;
 
             } catch (out_of_range r) {
                 cerr << "Invalid Move. " << r.what() << endl;
