@@ -36,21 +36,22 @@ class Board: public Observer {
     //Resets the board
     void resetGame();
     //Starts game by initializing board
-    virtual void startGame() = 0;
+    virtual void initGame() = 0;
     //Check if game is done
     virtual bool gameOver() = 0;
     //Check if game is in a valid state
     virtual bool gameState() = 0;
     //Generates players
-    virtual void genPlayers(vector<string> playerNames) = 0;
+    virtual void createPlayers(vector<string> playerNames) = 0;
 
     protected:
         void setBoard(int row, int col);
         void setPiece(int row, int col, Piece *piece);
         Piece *getPiece(string colour, string name) const;
         vector<Piece*> getPiecesRef() const;
-        void addPlayer(Player *player);
+        void addPlayer(Player *thePlayer);
         Player *getPlayer(int num) const;
+        int getNumPlayers() const;
         void updateScore(string colour, int point);
         int getScore(string colour) const;
         void setPlayerTurn(string colour);

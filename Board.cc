@@ -62,6 +62,19 @@ vector<Piece*> Board::getPiecesRef() const {
     return pieces;
 }
 
+int Board::getNumPlayers() const {
+    return thePlayers.size();
+}
+
+void Board::addPlayer(Player *thePlayer) {
+    thePlayer->setBoard(this);
+    thePlayers.emplace_back(make_unique<Player>(thePlayer));
+}
+
+Player* Board::getPlayer(int num){
+    return thePlayers.at(num).get();
+}
+
 void Board::setPlayerTurn(string colour){
     playerTurn = colour;
 }
@@ -101,5 +114,13 @@ void Board::resign(){
 }
 
 void Board::run(vector<string> playerNames){
-
+    inPlay = true;
+    if (playerNames.size() == 0) {
+        theTextDisplay->printBoard();
+    } else {
+        resetGame();
+        inPlay = true;
+        createPlayers(playerNames);
+        initGame();
+    }
 }
