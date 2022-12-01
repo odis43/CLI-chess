@@ -9,7 +9,7 @@ private:
     Piece *lastPiece;
     Piece *currentPiece;
 
-    Tile *intialTile;
+    Tile *initialTile;
     Tile *destinationTile;
 
     int turn;
