@@ -6,7 +6,7 @@ class Piece;
 
 class Move {
 private:
-    Piece *lastPiece;
+    Piece *previousPiece;
     Piece *currentPiece;
 
     Tile *initialTile;
@@ -15,10 +15,10 @@ private:
     int turn;
 
 public:
-    Move(Piece *lastPiece, Piece *currentPiece, Tile *initialTile, Tile *destinationTile, int turn); // constructor
+    Move(Piece *previousPiece, Piece *currentPiece, Tile *initialTile, Tile *destinationTile, int turn); // constructor
     ~Move(); // destructor
 
-    Piece *getLastPiece(); // get last piece
+    Piece *getPreviousPiece(); // get last piece
     Piece *getCurrentPiece(); // get current piece
 
     Tile *getInitialTile(); // get initial tile

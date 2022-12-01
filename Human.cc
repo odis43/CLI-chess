@@ -71,7 +71,7 @@ vector<int> Human::moveCreate() {
                 curBoard.at(initialRow).at(initialCol)->remove();
 
                 // Second, swap the pieces at initial tile and destination tile
-                Piece *lastPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
+                Piece *previousPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
                 curBoard.at(destinationRow).at(destinationCol)->setPiece(currentPiece);
 
                 // Third, modify applicable piece values after movement
@@ -79,8 +79,8 @@ vector<int> Human::moveCreate() {
                 currentPiece->setNotMoved(false);
 
                 // Fourth, check for an existing captured piece and respond accordingly
-                if (lastPiece) {
-                    return vector<int>{lastPiece->getVal(), currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                if (previousPiece) {
+                    return vector<int>{previousPiece->getVal(), currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
                 } else {
                     return vector<int>{0, currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
                 }

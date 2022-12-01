@@ -6,13 +6,13 @@
 using namespace std;
 
 // Constructor
-Move::Move(Piece *lastPiece, Piece *currentPiece, Tile *initialTile, Tile *destinationTile, int turn) : lastPiece{lastPiece}, currentPiece{currentPiece}, initialTile{initialTile}, destinationTile{destinationTile}, turn{turn} {}
+Move::Move(Piece *previousPiece, Piece *currentPiece, Tile *initialTile, Tile *destinationTile, int turn) : previousPiece{previousPiece}, currentPiece{currentPiece}, initialTile{initialTile}, destinationTile{destinationTile}, turn{turn} {}
 
 // Destructor
 Move::~Move() {}
 
-// Get lastPiece
-Piece *Move::getLastPiece() { return lastPiece; }
+// Get previousPiece
+Piece *Move::getPreviousPiece() { return previousPiece; }
 
 // Get currentPiece
 Piece *Move::getCurrentPiece() { return currentPiece; }
@@ -34,9 +34,9 @@ void Move::print() {
     cout << "Current Piece: "; // print current piece
     currentPiece->print();
     cout << " " << currentPiece->getVal() << endl; // print relevant value to current piece
-    cout << "Old Piece: "; // print current piece
-    lastPiece->print();
-    cout << " " << lastPiece->getVal() << endl; // print relevant value to current piece
+    cout << "Previous Piece: "; // print current piece
+    previousPiece->print();
+    cout << " " << previousPiece->getVal() << endl; // print relevant value to previous piece
     cout << "Initial Tile: " << initialTile->getRow() << " " << initialTile->getCol() << endl; // print out initialTile info
     cout << "Destination Tile: " << destinationTile->getRow() << " " << destinationTile->getCol() << endl; // print out destinationTile info
     cout << endl;
