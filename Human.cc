@@ -50,14 +50,34 @@ vector<int> Human::moveCreate() {
             // Exception Handling
             try {
                 // Destination tile is the same as initial tile?
-                if (initialRow == destinationRow && initialCol == destinationCol) { throw out_of_range("Reason: Destination tile is same as initial tile"); }
-
+                if (initialRow == destinationRow && initialCol == destinationCol) throw out_of_range("Reason: Destination tile is same as initial tile");
+                
+                // Acquire piece at initial tile
                 Piece *testInitial = curBoard.at(initialRow).at(initialCol)->getPiece();
-                Piece *testDestination = curBoard.at(initialRow).at(initialCol)->getPiece();
+                // Acquire destination tile
+                Tile *testDestination = curBoard.at(destinationRow).at(destinationCol);
+
                 // No piece in initial tile?
-                if (testInitial == nullptr) { throw out_of_range("Reason: No piece located within initial tile"); } 
-                // check if user even owns the piece
-                if (own(testDestination) == false) { throw out_of_range("Reason: You do not own that piece"); }
+                if (testInitial == nullptr) throw out_of_range("Reason: No piece located within initial tile");
+
+                // Check if user even owns the piece
+                if (own(testDestination) == false) throw out_of_range("Reason: You do not own that piece");
+                
+                // Check if the ending destination is a valid move for the piece at initial tile
+                if (testInitial->isValidMove(testDestination) == 0) throw out_of_range("Reason: No valid moves lead there");
+
+                // Now we actually move
+                // First, remove piece from initial tile
+                curBoard.at(initialRow).at(initialCol)->remove();
+
+                // Second, swap the pieces at initial tile and destination tile
+                Piece *capturedPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
+                curBoard.at(destinationRow).at(destinationCol)->setPiece(testInitial);
+
+                // Third, modify applicable piece values after movement
+                testInitial->setTile(testDestination);
+                testInitial->setNotMoved(false);
+
 
 
             } catch (out_of_range r) {
