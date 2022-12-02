@@ -1,6 +1,4 @@
 #include "Rook.h"
-#include "Tile.h"
-#include "Piece.h"
 
 using namespace std;
 
@@ -13,7 +11,7 @@ void Rook::print() {
     if(getColour() == "black") cout << "r";
 }
 
-void moveUp(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::moveUp(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     int newRow = row + 1;
     while(newRow < 8) {
         Piece *tilePiece = board[newRow][col]->getPiece();
@@ -32,7 +30,7 @@ void moveUp(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile)
     }
 }
 
-void moveDown(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::moveDown(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     int newRow = row - 1;
     while(newRow >= 0) {
         Piece *tilePiece = board[newRow][col]->getPiece();
@@ -45,13 +43,13 @@ void moveDown(int row, int col, std::vector<std::vector<Tile*>> board, Tile *til
                 break;
             }
         } else {
-            updateValidMoves(board[newRow][col], 1)
+            updateValidMoves(board[newRow][col], 1);
             newRow--;
         }
     }
 }
 
-void moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     int newCol = col + 1;
     while(newCol < 8) {
         Piece *tilePiece = board[row][newCol]->getPiece();
@@ -68,9 +66,9 @@ void moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *ti
             newCol++;
         }
     }
- }
+}
 
-void moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     int newCol = col - 1;
     while(newCol >= 0) {
         Piece *tilePiece = board[row][newCol]->getPiece();
@@ -83,13 +81,13 @@ void moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *ti
                 break;
             }
         } else {
-            updateValidMoves(board[row][newCol], 1)
+            updateValidMoves(board[row][newCol], 1);
             newCol--;
         }
     }
 }
 
-void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     moveUp(row, col, board, tile);
     moveDown(row, col, board, tile);
     moveLeft(row, col, board, tile);
