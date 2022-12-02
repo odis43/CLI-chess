@@ -39,6 +39,10 @@ void Piece::setBoard(Board* board){
     this->attach(theBoard);
 }
 
+void Piece::printThePiece(){
+    print();
+}
+
 Board* Piece::getBoard() {
     return theBoard;
 }

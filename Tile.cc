@@ -1,8 +1,4 @@
 #include "Tile.h"
-
-#ifndef CELL
-#define CELL
-
 #include <map>
 #include <vector>
 

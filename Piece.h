@@ -36,6 +36,7 @@ class Piece: public Subject {
         void setTracker(int num);
         int getVal();
         int isValidMove(Tile* tile);
+        void printThePiece();
         map<Tile*, int>getValidMoves();
         void createValidMoves();
         void updateValidMoves(Tile* tile, int num);
