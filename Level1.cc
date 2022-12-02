@@ -45,7 +45,7 @@ std::vector<int> Level1::moveCreate() {
             int rowInitialTile = intialTile->getRow(); // get row of this chosen piece's tile
             int colInitialTile = intialTile->getCol(); // get col of this chosen piece's tile
 
-            Tile *destinationTile = chosenPiece->getRandomValidMove(); // this is the tile where our move will land on
+            Tile *destinationTile = chosenPiece->getRandomMove(); // this is the tile where our move will land on
             int rowDestinationTile = destinationTile->getRow(); // get row of the destination tile
             int colDestinationTile = destinationTile->getCol(); // get col of the destination tile
 
