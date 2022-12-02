@@ -85,8 +85,6 @@ vector<int> Human::moveCreate() {
                     return vector<int>{0, currentPiece->getTracker(), initialRow, initialCol, destinationRow, destinationCol};
                 }
 
-                break;
-
             } catch (const out_of_range &e) {
                 cerr << "Invalid Move. " << r.what() << endl;
             }
