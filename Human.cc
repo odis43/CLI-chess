@@ -62,7 +62,7 @@ vector<int> Human::moveCreate() {
                 if (currentPiece == nullptr) throw out_of_range("Reason: No piece located within initial tile");
 
                 // Check if user even owns the piece
-                if (own(testDestination) == false) throw out_of_range("Reason: You do not own that piece");
+                if (own(currentPiece) == false) throw out_of_range("Reason: You do not own that piece");
                 
                 // Check if the ending destination is a valid move for the piece at initial tile
                 if (currentPiece->isValidMove(testDestination) == 0) throw out_of_range("Reason: No valid moves lead there");
@@ -73,7 +73,7 @@ vector<int> Human::moveCreate() {
 
                 // Second, swap the pieces at initial tile and destination tile
                 Piece *previousPiece = curBoard.at(destinationRow).at(destinationCol)->getPiece();
-                curBoard.at(destinationRow).at(destinationCol)->setPiece(currentPiece);
+                curBoard.at(destinationRow).at(destinationCol)->set(currentPiece);
 
                 // Third, modify applicable piece values after movement
                 currentPiece->setTile(testDestination);
@@ -87,7 +87,7 @@ vector<int> Human::moveCreate() {
                 }
 
             } catch (const out_of_range &e) {
-                cerr << "Invalid Move. " << r.what() << endl;
+                cerr << "Invalid Move. " << e.what() << endl;
             }
         } else {
             // if no valid move is provided
