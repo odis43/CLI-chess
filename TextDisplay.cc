@@ -28,7 +28,7 @@ void TextDisplay::printBoard() {
             auto boardTile = chessBoard[i][j];
             cout << "| ";
             if (boardTile->getPiece()) {
-                boardTile->getPiece()->printPiece();
+                boardTile->getPiece()->printThePiece();
             } else {
                 cout << " ";
             }
