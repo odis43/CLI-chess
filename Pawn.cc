@@ -1,14 +1,14 @@
-//#include "Piece.h"
+#include "Piece.h"
 #include "Pawn.h"
 
-using namespace std
+using namespace std;
 
-Pawn::Pawn(string color):Piece{color, 1},color{color},isPromoted{false},hasTwoStepped{false}{}
+Pawn::Pawn(string colour):Piece{colour, 1},isPromoted{false},hasTwoStepped{false} {}
 Pawn::~Pawn(){}
 
 void Pawn::genMove(int row, int col, vector<vector<Tile*>> board, Tile *tile) {
     //for two step
-    if(getNotMoved == true) {
+    if(getNotMoved() == true) {
         int newRow = row - 2;
         if(getColour() == "white") {
             newRow = row + 2;

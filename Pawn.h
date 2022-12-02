@@ -9,7 +9,7 @@ class Pawn : public Piece {
     bool isPromoted;
     bool hasTwoStepped;
     public:
-        Pawn(std::string color);
+        Pawn(std::string colour);
         ~Pawn();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void setStatus();
