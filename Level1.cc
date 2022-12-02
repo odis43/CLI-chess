@@ -30,7 +30,7 @@ std::vector<int> Level1::moveCreate() {
                 for (int j = 0; j < 8; j++) {
                     Piece *myPiece = curBoard.at(i).at(j)->getPiece(); // get each piece in the board
                     
-                    if (!myPiece && myPiece->getColour() == colour) { // if belonging to my colour and existent
+                    if (!myPiece && myPiece->getColour() == getColour()) { // if belonging to my colour and existent
                         myPieces.emplace_back(myPiece); // add to my list of available pieces to move
                     }
                 }
@@ -41,7 +41,7 @@ std::vector<int> Level1::moveCreate() {
             do { // used to select a random piece from myPieces
                 randomVal = rand() % myPieces.size(); // generate a random value within the number of pieces in myPieces
                 chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal
-            } while (chosenPiece->validMoves.size() == 0); // repeat if no valid moves belong to the piece
+            } while (chosenPiece->getValidMoves().size() == 0); // repeat if no valid moves belong to the piece
 
             Tile *initialTile = chosenPiece->getTile(); // this is the tile where the chosen piece is on
             int rowInitialTile = initialTile->getRow(); // get row of this chosen piece's tile

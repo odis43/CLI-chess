@@ -54,7 +54,7 @@ vector<int> Player::move() {
 
 Board *Player::getBoard() { return board; }
 
-int Player::getColour() { return colour; }
+string Player::getColour() { return colour; }
 
 bool Player::getResign() { return resign; }
 
