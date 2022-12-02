@@ -1,8 +1,7 @@
 #ifndef ROOK
 #define ROOK
 
-//#include "Piece.h"
-
+#include "Piece.h"
 #include "Tile.h"
 
 class Rook : public Piece {

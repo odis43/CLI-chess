@@ -1,5 +1,6 @@
 #include "Rook.h"
 #include "Tile.h"
+#include "Rook.h"
 
 using namespace std;
 
@@ -18,14 +19,14 @@ void Rook::print() {
         Piece *tilePiece = board[newRow][col]->getPiece();
         if(tilePiece) {
             if(tilePiece ->getColour() == getColour()) {
-                updateValidMove(board[newRow][col],3);
+                updateValidMoves(board[newRow][col],3);
                 break;
             } else {
-                updateValidMove(board[newRow][col],2);
+                updateValidMoves(board[newRow][col],2);
                 break;
             }
         } else {
-            updateValidMove(board[newRow][col], 1)
+            updateValidMoves(board[newRow][col], 1);
             newRow++;
         }
     }
@@ -37,14 +38,14 @@ void Rook::print() {
         Piece *tilePiece = board[newRow][col]->getPiece();
         if(tilePiece) {
             if(tilePiece ->getColour() == getColour()) {
-                updateValidMove(board[newRow][col],3);
+                updateValidMoves(board[newRow][col],3);
                 break;
             } else {
-                updateValidMove(board[newRow][col],2);
+                updateValidMoves(board[newRow][col],2);
                 break;
             }
         } else {
-            updateValidMove(board[newRow][col], 1)
+            updateValidMoves(board[newRow][col], 1)
             newRow--;
         }
     }
@@ -56,14 +57,14 @@ void Rook::print() {
         Piece *tilePiece = board[row][newCol]->getPiece();
         if(tilePiece) {
             if(tilePiece ->getColour() == getColour()) {
-                updateValidMove(board[row][newCol],3);
+                updateValidMoves(board[row][newCol],3);
                 break;
             } else {
-                updateValidMove(board[row][newCol],2);
+                updateValidMoves(board[row][newCol],2);
                 break;
             }
         } else {
-            updateValidMove(board[row][newCol], 1)
+            updateValidMoves(board[row][newCol], 1);
             newCol++;
         }
     }
@@ -75,14 +76,14 @@ void Rook::print() {
         Piece *tilePiece = board[row][newCol]->getPiece();
         if(tilePiece) {
             if(tilePiece ->getColour() == getColour()) {
-                updateValidMove(board[row][newCol],3);
+                updateValidMoves(board[row][newCol],3);
                 break;
             } else {
-                updateValidMove(board[row][newCol],2);
+                updateValidMoves(board[row][newCol],2);
                 break;
             }
         } else {
-            updateValidMove(board[row][newCol], 1)
+            updateValidMoves(board[row][newCol], 1)
             newCol--;
         }
     }
