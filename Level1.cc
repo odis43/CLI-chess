@@ -4,6 +4,7 @@
 #include "Level1.h"
 #include "Tile.h"
 #include "Piece.h"
+#include "Board.h"
 
 using namespace std;
 

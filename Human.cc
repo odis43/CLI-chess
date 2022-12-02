@@ -5,6 +5,7 @@
 #include <stdexcept>
 #include "Human.h"
 #include "Tile.h"
+#include "Board.h"
 
 using namespace std;
 
