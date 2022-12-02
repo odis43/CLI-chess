@@ -44,7 +44,24 @@ std::vector<int> Level1::moveCreate() {
             Tile *initialTile = chosenPiece->getTile(); // this is the tile where the chosen piece is on
             int rowInitialTile = intialTile->getRow(); // get row of this chosen piece's tile
             int colInitialTile = intialTile->getCol(); // get col of this chosen piece's tile
+
+            Tile *destinationTile = chosenPiece->getRandomValidMove(); // this is the tile where our move will land on
+            int rowDestinationTile = destinationTile->getRow(); // get row of the destination tile
+            int colDestinationTile = destinationTile->getCol(); // get col of the destination tile
+
+            try { // now let's actually commit to the move
+                initialTile->remove(); // first remove the piece at our initial tile because it is moving
+                destinationTile->set(chosenPiece); // because our chosen piece will now live on the destination tile
+                chosenPiece->setTile(destinationTile); // because our chosen piece will belong to destination tile
+                chosenPiece->setNotMoved(false); // because piece has moved
+
+            } catch (const out_of_range &e) {
+                // if no valid move is provided
+                cerr << "Invalid Move. " << r.what() << endl;
+                moveCreate();
+            }
         }
     }
+    return vector<int>();
 }
 

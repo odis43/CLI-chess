@@ -87,7 +87,7 @@ vector<int> Human::moveCreate() {
 
                 break;
 
-            } catch (out_of_range r) {
+            } catch (const out_of_range &e) {
                 cerr << "Invalid Move. " << r.what() << endl;
             }
         } else {
