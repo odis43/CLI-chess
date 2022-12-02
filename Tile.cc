@@ -15,7 +15,7 @@ void Tile::set(Piece *piece) {
 }
 
 void Tile::setAll(vector<Piece *> pieces) {
-    this->all = pieces;
+    this->pieces = pieces;
 }
 
 void Tile::remove() {

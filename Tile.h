@@ -9,8 +9,10 @@
 class Piece;
 
 class Tile: public Observer {
+    int row, col;
     Piece *piece;
-    int row, col, status;
+    int status;
+    std::map<std::string, int> numThreats;
     std::vector<Piece*> pieces;
 public:
     Tile(int row, int col);

@@ -3,7 +3,7 @@
 
 //#include "Piece.h"
 #include "Tile.h"
-
+#include "Piece.h"
 class Knight : public Piece {
     public:
         Knight(std::string colour);

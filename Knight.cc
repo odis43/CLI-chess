@@ -1,5 +1,6 @@
 #include "Knight.h"
 
+
 using namespace std;
 
 Knight::Knight(string colour):Piece{colour,3}{}
@@ -51,7 +52,7 @@ void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile
     for(auto move : possibleMove) {
         Piece *tilePiece = move->getPiece();
         if(tilePiece) {
-            if(tilePiece->getColour() != this->getColour()) {
+            if(tilePiece->getColour() != getColour()) {
                 updateValidMoves(move,2);
             } else {
                 updateValidMoves(move, 3);
