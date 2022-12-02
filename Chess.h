@@ -6,12 +6,12 @@
 
 class Chess : public Board {
     int check,checkmate;
-    bool stalement;
+    bool stalemate;
     std::vector<Piece *> pieces;
     std::map<string,int> numEachPiece;
 
     //void modifyNumPos
-    void pawnPromote(Piece *p);
+    void pawnPromote(Pawn *p);
     void Castle(Piece *p);
 
     public:

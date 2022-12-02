@@ -11,10 +11,13 @@ class Pawn : public Piece {
     public:
         Pawn(std::string colour);
         ~Pawn();
-        void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
+        void genMoves(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void setStatus();
         bool getStatus();
         void print() override;
+
+        void castlingStatus() override;
+        bool getCastlingStatus() override;
 };
 
 #endif
