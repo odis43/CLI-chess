@@ -13,8 +13,8 @@ class King: public Piece {
 
         void print();
         void genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col);
-        void uniqueStatus();
-        void getUniqueStatus();
+        void castlingStatus();
+        bool getCastlingStatus();
 
 };
 

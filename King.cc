@@ -111,9 +111,9 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
     }
 }
 
-void King::uniqueStatus(){
+void King::castlingStatus(){
     this->castle = !this->castle;
 }
-void King::getUniqueStatus(){
+void King::getCastlingStatus(){
     return this->castle;
 }
