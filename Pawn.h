@@ -1,7 +1,9 @@
 #ifndef PAWN
 #define PAWN
 
-#include "Tile.h"
+
+#include "Piece.h"
+
 class Pawn : public Piece {
     bool isPromoted;
     bool hasTwoStepped;
@@ -11,6 +13,7 @@ class Pawn : public Piece {
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void setStatus();
         bool getStatus();
+        void print() override;
 };
 
 #endif

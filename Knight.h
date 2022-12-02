@@ -9,7 +9,7 @@ class Knight : public Piece {
         Knight(std::string colour);
         ~Knight();
         void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
-    
+        void print() override;
 };
 
 #endif

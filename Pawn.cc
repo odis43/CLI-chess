@@ -65,7 +65,7 @@ void Pawn::setStatus() {
     hasTwoStepped = !hasTwoStepped;
 }
 
-void Pawm::print() {
+void Pawn::print() {
     if(this->getColour() == "black"){
         cout << "p";
     } else {

@@ -3,7 +3,8 @@
 
 //#include "Piece.h"
 
-#include "Tile.h"
+
+#include "Piece.h"
 
 class Rook : public Piece {
     public:
@@ -14,6 +15,7 @@ class Rook : public Piece {
         void moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void moveUp(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
         void moveDown(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
+        void print() override;
 };
 
 #endif
