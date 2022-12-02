@@ -83,6 +83,18 @@ int Board::getRound() const {
     return round;
 }
 
+void Board::addMove(Move *theMove){
+    prevMoves.emplace_back(move(make_unique<Move>(m)));
+}
+
+Move* Board::getMove(int num){
+    if (prevMoves.size() == 0){
+        return nullptr;
+    } else {
+        return prevMoves.at(num).get();
+    }
+}
+
 void Board::updateScore(string colour, int point){
     if (theScore.count(colour)) {
         theScore[colour] = theScore[colour] + point;
@@ -93,6 +105,10 @@ void Board::updateScore(string colour, int point){
 
 int Board::getScore(string colour) const {
     return theScore.at(colour);
+}
+
+TextDiplay *Board::getTextDisplay(){
+    return theTextDisplay.get();
 }
 
 void Board::resetGame(){
@@ -123,4 +139,30 @@ void Board::run(vector<string> playerNames){
         createPlayers(playerNames);
         initGame();
     }
+
+    for (int i = 0; i < pieces.size(); i++){
+        thePieces[i]->setTracker(i);
+        thePieces[i]->createValidMoves();
+        thePieces[i]->notifyObservers();
+    }
+
+    // Connects each tile to a piece
+    for (int i = 0; i < theBoard.size(); i++){
+        for (int j = 0; j < theBoard.at(i).size(); j++){
+            theBoard[i][j]->setAll(getPiecesRef);
+        }
+    }
+
+    while(inPlay){
+        if (gameOver()) {
+            inPlay = false;
+            break;
+        }
+        Player* curPlayer = thePlayers[playerTurn].get();
+        vector<int> theirMove = curPlayer->move();
+
+    }
+
+    cout << "Game Over" << endl;
+    reset();
 }

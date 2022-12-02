@@ -24,6 +24,14 @@ string Piece::getColour(){
     return this->colour;
 }
 
+int Piece::getTracker(){
+    return this->tracker;
+}
+
+void Piece::setTracker(int num){
+    tracker = num;
+}
+
 int Piece::getVal(){
     return this->val;
 }

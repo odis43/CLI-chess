@@ -13,8 +13,9 @@ class Board;
 class Piece: public Subject {
     Tile *tile;
     string colour;
-    int val;
+    int tracker;
     bool notMoved;
+    int val;
     map<Tile*, int> validMoves;
     Board *board;
 
@@ -28,6 +29,8 @@ class Piece: public Subject {
         Tile *getTile();
         void setTile(Tile *tile);
         string getColour();
+        int getTracker();
+        void setTracker(int num);
         int getVal();
         int isValidMove(Tile* tile);
         map<Tile*, int>getValidMoves();

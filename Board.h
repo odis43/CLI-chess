@@ -23,6 +23,8 @@ class Board: public Observer {
     vector<unique_ptr<Piece>> thePieces;
     //Players
     vector<unique_ptr<Player>> thePlayers;
+    //Previous moves
+    vector<unique_ptr<Move>> prevMoves;
     //Tracks number of rounds
     int round;
     //Tracks who's turn 
@@ -55,6 +57,8 @@ class Board: public Observer {
         void updateScore(string colour, int point);
         int getScore(string colour) const;
         void setPlayerTurn(string colour);
+        void addMove(Move *theMove);
+        Move *getMove(int num);
         int getRound() const;
 
     public:
