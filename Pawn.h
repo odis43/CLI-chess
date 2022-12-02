@@ -3,6 +3,7 @@
 
 
 #include "Piece.h"
+#include "Tile.h"
 
 class Pawn : public Piece {
     bool isPromoted;

@@ -2,7 +2,7 @@
 #include "Tile.h"
 #include "Rook.h"
 
-using namespace std;
+using namespace std
 
 Rook::Rook(string colour):Piece{colour, 5}, {}
 

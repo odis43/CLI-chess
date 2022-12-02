@@ -1,11 +1,7 @@
-#ifndef PAWN
-#define PAWN
-
 //#include "Piece.h"
 #include "Pawn.h"
-#include "Tile.h"
 
-using namespace std;
+using namespace std
 
 Pawn::Pawn(string color):Piece{color, 1},color{color},isPromoted{false},hasTwoStepped{false}{}
 Pawn::~Pawn(){}
