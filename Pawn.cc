@@ -66,7 +66,7 @@ void Pawn::setStatus() {
 }
 
 void Pawm::print() {
-    if(this->getColor() == "black"){
+    if(this->getColour() == "black"){
         cout << "p";
     } else {
         cout << "P";

@@ -51,19 +51,19 @@ void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile
     for(auto move : possibleMove) {
         Piece *tilePiece = move->getPiece();
         if(tilePiece) {
-            if(tilePiece->getColour() != getColour()) {
-                updateValidMove(move,2);
+            if(tilePiece->getColour() != this->getColour()) {
+                updateValidMoves(move,2);
             } else {
-                updateValidMove(move, 3);
+                updateValidMoves(move, 3);
             }
         } else {
-            updateValidMove(move, 1);
+            updateValidMoves(move, 1);
         }
     }
 }
 
 void Knight::print() {
     if(getColour() == "white") cout << "K";
-    if(getColor() == "black") cout << "k";
+    if(getColour() == "black") cout << "k";
 }
 
