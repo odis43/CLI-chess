@@ -7,7 +7,7 @@
 using namespace std;
 Tile::Tile(int row, int col):row{row},col{col},piece{nullptr},status{-1},numThreats{map<string, int>()}{}
 
-Tile::Tile(){}
+Tile::~Tile(){}
 
 void Tile::set(Piece *piece) {
     this->piece = piece;
