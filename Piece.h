@@ -4,7 +4,7 @@
 #include<iostream>
 #include<map>
 #include<vector>
-#include "subject.h"
+#include "Subject.h"
 using namespace std;
 
 class Tile;
