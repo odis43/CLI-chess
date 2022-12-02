@@ -80,9 +80,9 @@ vector<int> Human::moveCreate() {
 
                 // Fourth, check for an existing captured piece and respond accordingly
                 if (previousPiece) {
-                    return vector<int>{previousPiece->getVal(), currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                    return vector<int>{previousPiece->getTracker(), currentPiece->getTracker(), initialRow, initialCol, destinationRow, destinationCol};
                 } else {
-                    return vector<int>{0, currentPiece->getVal(), initialRow, initialCol, destinationRow, destinationCol};
+                    return vector<int>{0, currentPiece->getTracker(), initialRow, initialCol, destinationRow, destinationCol};
                 }
 
                 break;

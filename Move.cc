@@ -33,10 +33,10 @@ void Move::print() {
     cout << endl;
     cout << "Current Piece: "; // print current piece
     currentPiece->print();
-    cout << " " << currentPiece->getVal() << endl; // print relevant value to current piece
+    cout << " " << currentPiece->getTracker() << endl; // print relevant value to current piece
     cout << "Previous Piece: "; // print current piece
     previousPiece->print();
-    cout << " " << previousPiece->getVal() << endl; // print relevant value to previous piece
+    cout << " " << previousPiece->getTracker() << endl; // print relevant value to previous piece
     cout << "Initial Tile: " << initialTile->getRow() << " " << initialTile->getCol() << endl; // print out initialTile info
     cout << "Destination Tile: " << destinationTile->getRow() << " " << destinationTile->getCol() << endl; // print out destinationTile info
     cout << endl;
