@@ -49,7 +49,7 @@ class Board: public Observer {
     protected:
         void setBoard(int row, int col);
         void setPiece(int row, int col, Piece *piece);
-        Piece *getPiece(string colour, string name) const;
+        Piece *getPiece(int tracker) const;
         vector<Piece*> getPiecesRef() const;
         void addPlayer(Player *thePlayer);
         Player *getPlayer(int num) const;
@@ -68,7 +68,7 @@ class Board: public Observer {
         bool resign();
         virtual void setup() = 0;
         void run(vector<string> playerNames);
-        TextDisplay *getTextDisplay();
+        TextDisplay* getTextDisplay();
         virtual void notify() = 0;
 };
 

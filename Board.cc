@@ -29,12 +29,16 @@ void Board::setPiece(int row, int col, Piece *piece){
     piece->setTile(tile);
     auto ptr = make_unique<Piece>(piece);
     thePieces.emplace_back(move(ptr));
-    thePlayers.at(piece->getColour())->addPiece(piece);
+    if (piece->getColour() == "white") {
+        thePlayers[0]->addPiece(piece);
+    } else if (piece->getColour() == "black") {
+        thePlayers[1]->addPiece(piece);
+    }
 }
 
-Piece* Board::getPiece(string colour, string name) const {
+Piece* Board::getPiece(int tracker) const {
     for (auto &thePiece:thePieces) {
-        if (thePiece->getColour() == colour && thePiece->getName() == name) {
+        if (thePiece->getTracker() == tracker) {
             return thePiece.get();
         }
     }
@@ -71,7 +75,7 @@ void Board::addPlayer(Player *thePlayer) {
     thePlayers.emplace_back(make_unique<Player>(thePlayer));
 }
 
-Player* Board::getPlayer(int num){
+Player* Board::getPlayer(int num) const {
     return thePlayers.at(num).get();
 }
 
@@ -84,7 +88,7 @@ int Board::getRound() const {
 }
 
 void Board::addMove(Move *theMove){
-    prevMoves.emplace_back(move(make_unique<Move>(m)));
+    prevMoves.emplace_back(move(make_unique<Move>(theMove)));
 }
 
 Move* Board::getMove(int num){
@@ -107,7 +111,7 @@ int Board::getScore(string colour) const {
     return theScore.at(colour);
 }
 
-TextDiplay *Board::getTextDisplay(){
+TextDiplay* Board::getTextDisplay(){
     return theTextDisplay.get();
 }
 
@@ -120,11 +124,9 @@ void Board::resetGame(){
     thePieces.clear();
 }
 
-void Board::resign(){
-    for (auto player:thePlayers) {
-        if (player->getResign()) {
-            return true;
-        }
+bool Board::resign(){
+    if (thePlayers[0]->getResign() || thePlayers[1]->getResign()) {
+        return true;
     }
     return false;
 }
@@ -140,7 +142,7 @@ void Board::run(vector<string> playerNames){
         initGame();
     }
 
-    for (int i = 0; i < pieces.size(); i++){
+    for (int i = 0; i < thePieces.size(); i++){
         thePieces[i]->setTracker(i);
         thePieces[i]->createValidMoves();
         thePieces[i]->notifyObservers();
@@ -149,7 +151,7 @@ void Board::run(vector<string> playerNames){
     // Connects each tile to a piece
     for (int i = 0; i < theBoard.size(); i++){
         for (int j = 0; j < theBoard.at(i).size(); j++){
-            theBoard[i][j]->setAll(getPiecesRef);
+            theBoard[i][j]->setAll(getPiecesRef());
         }
     }
 
@@ -158,11 +160,48 @@ void Board::run(vector<string> playerNames){
             inPlay = false;
             break;
         }
-        Player* curPlayer = thePlayers[playerTurn].get();
+        Player* curPlayer;
+        if (playerTurn == "white") {
+            curPlayer = thePlayers[0].get();
+
+        } else if (playerTurn == "black") {
+            curPlayer = thePlayers[1].get();
+        }
+
         vector<int> theirMove = curPlayer->move();
+        if (theirMove.size() == 0){
+            cout << "Player Did Not Make A Move" << endl;
+            break;
+        } else if (theirMove.size() == 1 && gameOver()) {
+            inPlay = false;
+            break;
+        } else {
+            Piece* prevPiece = getPiece(theirMove[0]);
+            Piece* curPiece = getPiece(theirMove[1]);
+            Tile* initialTile = theBoard[theirMove[2]][theirMove[3]].get();
+            Tile* destTile = theBoard[theirMove[4]][theirMove[5]].get();
+            Move* currMove = new Move(prevPiece, curPiece, initialTile, destTile, round);
+            prevMoves.emplace_back(make_unique<Move>(currMove));
 
+            for (int i = 0; i < thePieces.size(); i++){
+                thePieces[i]->setTracker(i);
+                thePieces[i]->createValidMoves();
+                thePieces[i]->notifyObservers();
+            }
+
+            if (gameState()) {
+                if (playerTurn == "white") {
+                    playerTurn = "black";
+                } else if (playerTurn == "black") {
+                    playerTurn = "white";
+                }
+                round++;
+                theTextDisplay->printBoard();
+            } else {
+                cout << "Game is Invalid" << endl;
+            }
+        }
     }
-
     cout << "Game Over" << endl;
-    reset();
+    resetGame();
 }
