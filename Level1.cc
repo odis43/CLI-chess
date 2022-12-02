@@ -37,14 +37,15 @@ std::vector<int> Level1::moveCreate() {
             }
 
             int randomVal;
+            Piece *chosenPiece;
             do { // used to select a random piece from myPieces
                 randomVal = rand() % myPieces.size(); // generate a random value within the number of pieces in myPieces
-                Piece *chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal
+                chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal
             } while (chosenPiece->validMoves.size() == 0); // repeat if no valid moves belong to the piece
 
             Tile *initialTile = chosenPiece->getTile(); // this is the tile where the chosen piece is on
-            int rowInitialTile = intialTile->getRow(); // get row of this chosen piece's tile
-            int colInitialTile = intialTile->getCol(); // get col of this chosen piece's tile
+            int rowInitialTile = initialTile->getRow(); // get row of this chosen piece's tile
+            int colInitialTile = initialTile->getCol(); // get col of this chosen piece's tile
 
             Tile *destinationTile = chosenPiece->getRandomMove(); // this is the tile where our move will land on
             int rowDestinationTile = destinationTile->getRow(); // get row of the destination tile
@@ -52,7 +53,7 @@ std::vector<int> Level1::moveCreate() {
 
             try { // now let's actually commit to the move
                 initialTile->remove(); // first remove the piece at our initial tile because it is moving
-                Piece *previousPiece->destinationTile->getPiece(); // save the piece of the piece that was previously on the destination tile
+                Piece *previousPiece = destinationTile->getPiece(); // save the piece of the piece that was previously on the destination tile
                 destinationTile->set(chosenPiece); // because our chosen piece will now live on the destination tile
                 chosenPiece->setTile(destinationTile); // because our chosen piece will belong to destination tile
                 chosenPiece->setNotMoved(false); // because piece has moved
@@ -66,7 +67,7 @@ std::vector<int> Level1::moveCreate() {
 
             } catch (const out_of_range &e) {
                 // if no valid move is provided
-                cerr << "Invalid Move. " << r.what() << endl;
+                cerr << "Invalid Move. " << e.what() << endl;
                 moveCreate();
             }
         }
