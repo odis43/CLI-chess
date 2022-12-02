@@ -11,7 +11,7 @@ class Pawn : public Piece {
     public:
         Pawn(std::string colour);
         ~Pawn();
-        void genMoves(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile);
+        void genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, int col);
         void setStatus();
         bool getStatus();
         void print() override;

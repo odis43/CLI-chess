@@ -87,7 +87,7 @@ void Rook::moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Ti
     }
 }
 
-void Rook::genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, int col) {
     moveUp(row, col, board, tile);
     moveDown(row, col, board, tile);
     moveLeft(row, col, board, tile);

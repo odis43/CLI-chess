@@ -6,7 +6,7 @@ using namespace std;
 Pawn::Pawn(string colour):Piece{colour, 1},isPromoted{false},hasTwoStepped{false} {}
 Pawn::~Pawn(){}
 
-void Pawn::genMove(int row, int col, vector<vector<Tile*>> board, Tile *tile) {
+void Pawn::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col) {
     //for two step
     if(getNotMoved() == true) {
         int newRow = row - 2;
