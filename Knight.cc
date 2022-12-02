@@ -7,7 +7,7 @@ Knight::Knight(string colour):Piece{colour,3}{}
 
 Knight::~Knight(){}
 
-void genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Knight::genMove(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     vector <Tile*> possibleMove;
     if(row - 1 >= 0) {
         if(col - 2 >= 0) {
