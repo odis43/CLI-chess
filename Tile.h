@@ -1,5 +1,5 @@
-#ifndef CELL
-#define CELL
+#ifndef TILE
+#define TILE
 
 #include <map>
 #include <vector>
