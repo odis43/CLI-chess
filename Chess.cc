@@ -8,6 +8,7 @@
 #include "Queen.h"
 #include "AI.h"
 //#include rest of what we need when it is done
+#include "Move.h"
 #include <stdexcept>
 #include <unordered_map>
 
@@ -16,10 +17,10 @@ using namespace std;
 
 class Chess : public Board {
     int check,checkmate;
-    bool stalement;
+    bool stalemate;
     std::vector<Piece *> pieces;
     std::map<string,int> numEachPiece;
-
+    bool resigned;
     //void modifyNumPos
     void pawnPromote(Piece *p);
     void Castle(Piece *p);
@@ -35,19 +36,163 @@ class Chess : public Board {
         void printScore();
         void notify();
         int checkState(); //not valid when king is in check   
+
 };
 
 #endif
 
-Chess::Chess():Board{},check{-1},checkmate{-1},stalement{false},numEachPiece{map<string,int>()}{}
+Chess::Chess():Board{},check{-1},checkmate{-1},stalemate{false},numEachPiece{map<string,int>()},resigned{-1}{}
 
 Chess::~Chess(){}
 
-void Chess::pawnPromote(Piece *p) {
+void Chess::pawnPromote(Pawn *p) {
+    vector<vector<Tile*>> board = getBoardRef();
+    if(p->getColor() == "white" && !p->getStatus()) {
+        Tile *curr = p->getTile();
+        Piece *newpiece;
+        if(curr->getRow() == 0) {
+            string str;
+            curr->remove();
+            cout << "Please select a piece to promote (R,B,N,Q)" << endl;
+            while(getline(cin, str)) {
+                if(str == "R") {
+                    newpiece = new Rook("white");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
 
+                if(str == "B") {
+                    newpiece = new Bishop("white");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+
+                if(str == "N") {
+                    newpiece = new Knight("white");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+
+                if(str == "Q") {
+                    newpiece = new Queen("white");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+            }
+            for(int i = 0; i < (int) board.size(); i++) {
+                for(int j = 0; j < (int) board.at(i).size(); j++) {
+                    board[i][j]->setAll(getPiecesRef());
+                }
+            }
+
+            newpiece->setTracker(getRound() + 32);
+            Move *move = new Move(p, newpiece, curr, curr, getRound());
+            addMove(move);
+        }
+    }
+
+    if(p->getColour() == "black" && !p->getStatus()) {
+        Tile *curr = p->getTile();
+        Piece *newpiece;
+        if(curr->getRow() == 7) {
+            string str;
+            curr->remove();
+            cout << "Please select a piece to promote (r,b,n,q)" << endl;
+            while(getline(cin, str)) {
+                if(str == "r") {
+                    newpiece = new Rook("black");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+
+                if(str == "b") {
+                    newpiece = new Bishop("black");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+
+                if(str == "n") {
+                    newpiece = new Knight("black");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+
+                if(str == "q") {
+                    newpiece = new Queen("black");
+                    setPiece(curr->getRow(), curr->getCol(), newpiece);
+                    break;
+                }
+            }
+            for(int i = 0; i < (int) board.size(); i++) {
+                for(int j = 0; j < (int) board.at(i).size(); j++) {
+                    board[i][j]->setAll(getPiecesRef());
+                }
+            }
+
+            newpiece->setTracker(getRound() + 32);
+            Move *move = new Move(p, newpiece, curr, curr, getRound());
+            addMove(move);
+        }
+    }
 }
 
-void Chess::Castle(Piece *p) {}
+void Chess::Castle(Piece *p) {
+    vector<vector<Tile*>> board  = getBoardRef();
+    int row = p->getTile()->getRow();
+    int col = p->getTile()->getCol();
+    if(row == 7 && col == 6) { //white king 
+        Tile *RookCell = board[7][7];
+        Tile *newRookCell = board[7][5];
+        Piece *rook = board[7][7]->getPiece();
+        if(rook != nullptr && rook->getNotMoved()) {
+            rookCell->remove();
+            newRookCell->set(rook);
+            Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
+            addMove
+            addMove(move);
+        }
+    }
+
+        if(row == 7 && col == 2) { 
+        Tile *RookCell = board[7][0];
+        Tile *newRookCell = board[7][3];
+        Piece *rook = board[7][0]->getPiece();
+        if(rook != nullptr && rook->getNotMoved()) {
+            rookCell->remove();
+            newRookCell->set(rook);
+            Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
+            addMove
+            addMove(move);
+        }
+    }
+
+        if(row == 0 && col == 6) { //black king
+        Tile *RookCell = board[0][7];
+        Tile *newRookCell = board[7][5];
+        Piece *rook = board[0][7]->getPiece();
+        if(rook != nullptr && rook->getNotMoved()) {
+            rookCell->remove();
+            newRookCell->set(rook);
+            Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
+            addMove
+            addMove(move);
+        }
+    }
+
+        if(row == 0 && col == 2) { //black side king 
+        Tile *RookCell = board[0][0];
+        Tile *newRookCell = board[0][3];
+        Piece *rook = board[0][0]->getPiece();
+        if(rook != nullptr && rook->getNotMoved()) {
+            rookCell->remove();
+            newRookCell->set(rook);
+            Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
+            addMove
+            addMove(move);
+        }
+    }
+
+}
 
 void Chess::initGame(){
     numEachPiece["WP"]=0; //white pawn
@@ -113,17 +258,293 @@ void Chess::initGame(){
     numEachPiece.find("BP")->second = 8;
 }
 
-void Chess::setup();
+//helper function to create pieces for us
+Piece *returnPiece(char p) {
+    if(p == 'K') return new King("white");
+    if(p == 'k') return new King("black");
+    if(p == 'Q') return new Queen("white");
+    if(p == 'q') return new Queen("black");
+    if(p == 'B') return new Bishop("white");
+    if(p == 'b') return new Bishop("black");
+    if(p == 'R') return new Rook("white");
+    if(p == 'r') return new Rook("black");
+    if(p == 'N') return new Knight("white");
+    if(p == 'n') return new Knight("black");
+    if(p == 'P') return new Pawn("white");
+    if(p == 'p') return new Pawn("black");
+    else return nullptr;
+}
 
-void Chess::createPlayers(std::vector<std::string> names){}
+//Another helper for setup (get the number from e1 for eg)
+vector<int> numPos(string position) {
+    int row = 8 - stoi(position.substr(1));
+    int col = position[0] - 97;
+    vector<int> numpos = {row, col};
+    return numpos;
+}
 
-void Chess::winner(int l){}
+//helper to modify pos
+void Chess::modifyPos(char ch, int col, int val) {
+    int piece;
+    switch(val) {
+        case 1:
+            piece = 5;
+            break;
+        case 3:
+            piece = 3;
+            break;
+        case 4:
+            piece = 4;
+            break;
+        case 5:
+            piece = 2;
+            break;
+        case 9:
+            piece = 1;
+            break;
+        case 10:
+            piece = 0;
+            break;
+    }
+    if (col) piece += 6; // black piece
+    if (ch == '+') {
+        num_of[piece] += 1;
+    } else if (ch == '-') {
+        num_of[piece] -= 1;
+    }
+}
 
-void Chess::gameOver(){}
+void Chess::setup(){
+    TextDisplay *dis = getTextDisplay();
+    if(getPlayerSize() == 0) {
+        createPlayers({"human", "human"});
+        initGame();
+    }
 
-void Chess::printScore(){}
+    else {
+        dis->printBoard("chess", -1);
+    }
 
-void Chess::checkState(){}
+    string str;
+    vector<vector<Tile*>> board = getBoardRef();
+    while(getline(cin,str)) {
+        istringstream iss{str};
+        string command;
+        iss >> command;
+        //add the pieces
+        if(command == "+") { 
+            char piece;
+            string position;
+            iss >> piece >> position;
+            Piece *p = createPiece(piece);
+            try {
+                if(p) {
+                    //set the piece on the board using numPos
+                    if (!board[numPos(position)[0]][numPos(position)[1]]) {
+                        Piece *old = board[numPos(position)[0]][numPos(position)[1]]->getPiece();
+                        modifyPos('-',old->getColour(), old->getVal());
+                    }
 
-void Chess::notify(){}
+                    setPiece(numPos(position)[0], numPos(position)[1], p);
+                    modifyPos('+', p->getColour(), p->getVal());
+                }
+            } catch (...) {
+                cerr << "Bad Piece" << endl;
+            }
+        }
+
+        if(command == "-") {
+            try {
+                string position;
+                iss >> position;
+                Piece *p = board[numPos(position)[0]][numPos(position)[1]]->getPiece();
+                if (p) {
+                    board[numPos(position)[0]][numPos(position)[1]]->removePiece();
+                    modifyPos('-', p->getColour(), p->getVal());
+                }
+            } catch (...) {
+                cerr << "Bad Piece" << endl;
+            }
+        }
+
+        if(command == "=") {
+            string color;
+            iss >> color;
+            if(color == "white") setPlayerTurn("white");
+            if(color == "black") setPlayerTurn("black");
+            else cerr << "Bad input" << endl;
+        }
+
+        if(command == "done") {
+            bool pawnOnBack;
+            for (int i = 0; i < 8;i++) {
+                if(board.at(0).at(i)->getPiece() != nullptr && board.at(0).at(i)->getPiece()->getVal() == 1) pawnOnBack = true;
+            }
+
+             for (int i = 0;i < 8;i++) {
+                if(board.at(7).at(i)->getPiece() != nullptr && board.at(7).at(i)->getPiece()->getVal() == 1) pawnOnBack = true;
+            }
+
+            pawnOnBack = false;
+
+            if(numEachPiece.find("WK")->second != 1 || numEachPiece.find("BK")->second != 1) {
+                cerr << "Must have exactly one King at each color" << endl;
+            }
+
+            if (pawnOnBack) {
+                cerr << "No pawns on back row" << endl;
+            }
+
+            else {
+                break;
+            }
+        }
+
+        dis->printBoard("chess", -1);
+    }
+
+    cout << "Setup done" << endl;
+}
+
+void Chess::createPlayers(std::vector<std::string> names){
+    string playerSide = 0; //white
+    for(auto player: names) {
+        if(player == "human") {
+            Human *newPlayer = new Human(playerSide);
+            addPlayer(newPlayer);
+        }
+
+        if(player == "computer1"){
+            LevelOne *newPlayer = new LevelOne(playerSide);
+            addPlayer(newPlayer);
+        }
+
+        if(player == "computer2") {
+            LevelTwo *newPlayer = new LevelTwo(playerSide);
+            addPlayer(newPlayer);
+        }
+
+        playerSide++; //black
+    }
+}
+
+void Chess::winner(int l){
+    if(l == 0) cout << "Black won" << endl;
+    if(l == 1) cout << "White won" << endl;
+}
+
+bool Chess::gameOver(){
+    if (stalemate) {
+        for (int i = 0;i < getPlayerSize(); i++) {
+            string player;
+            if(i == 0) player = "white";
+            if(i == 1) player = "black";
+
+            updateScore(player, 0.5);
+        }
+
+        cout << "Stalemate" << endl;
+        retrun true;
+    }
+
+    if (checkmate != -1) {
+        if(checkmate == 0) {
+        cout << "White is in checkmate" << endl;
+    }
+
+    if(checkmate == 1) {
+        cout << "Black is in checkmate" << endl;
+    }
+
+    for (int i = 0;i < getPlayerSize(); i++) {
+        if(i != checkmate) { //skips player that got checkmated
+            if (i == 0) updateScore("white", 1);
+            if (i == 1) updateScore("black", 1);
+        }
+    }
+
+    winner(checkmate);
+    return true;
+    }
+
+    else {
+        this->resigned = resign();
+            if (this->resigned != -1) {
+                for (int i = 0; i < getPlayerSize(); ++i) {
+                    if (i != this->resigned) { // not the player that got checkmated
+                        if (i == 0) updateScore("white", 1);
+                        if (i == 1) updateScore("black", 1);
+                    }
+                }
+                winner(this->resigned);
+                return true;
+        }
+        return false;
+    }
+}
+
+void Chess::printScore(){
+    cout << "Final Score: " << endl;
+    if(scoreSize() < 2) cout << "No scores" << endl;
+    else {
+        cout << "White: " << getScore("white") << endl;
+        cout << "Black: " << getScore("black") << endl;
+    }
+}
+
+int Chess::checkState(){
+    if (check == 0) {
+        cout <<"White is in Check" << endl;
+    }
+
+    if(check == 1) {
+        cout << "Black is in Check" << endl;
+    }
+
+    return check;
+}
+
+void Chess::notify(){
+    vector<vector<Tile*>> board = getBoardRef();
+    all = getPiecesRef();
+    for(auto piece : all ){
+        if(piece->getVal() == 10) {
+            string color = piece->getColour();
+            if(piece->getTile()->getThreats(!color)){
+                this->check = color;
+            } else {
+                this->check = -1;
+            }
+
+    //checkmate check!!!
+            if(check != -1) {
+                bool noMove;
+                for(auto p : piece->getValidMoves()) {
+                    if(p.second != 3) {
+                        noMove = false;
+                    }
+                }
+                noMove = true;
+                if(noMove == true) {
+                    checkmate = color;
+                } else {
+                    checkmate = -1;
+                }
+            } else {
+                checkmate = -1;
+            }
+
+            if(piece->receiveUniqueStatus()) {
+                castle(piece);
+            }            
+            //pawn check
+        } else if (piece->getVal() == 1) {
+            if(piece->getTile()->getRow() == 0 || piece->getTile()->getRow() == 7) {
+                promote(piece);
+            }
+        }
+    }
+}
+
+
 

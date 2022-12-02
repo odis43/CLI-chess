@@ -85,3 +85,7 @@ void Tile::notify() {
     }
 }
 
+Piece* Tile::getPiece() {
+    return this->piece;
+}
+

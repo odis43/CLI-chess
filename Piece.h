@@ -22,6 +22,9 @@ class Piece: public Subject {
     virtual void genMoves(vector<vector<Tile*>>, Tile *tile, int row, int col) = 0;
     virtual void print() = 0;
 
+    virtual void uniqueStatus() = 0;
+    virtual bool getUniqueStatus() = 0;
+
     public:
         Piece(string colour, int val);
         virtual ~Piece();
@@ -41,6 +44,8 @@ class Piece: public Subject {
         Board *getBoard();
         void setBoard(Board *b);
         void notifyObservers();
+        void createUniqueStatus();
+        bool receiveUniqueStatus();
 };
 
 #endif

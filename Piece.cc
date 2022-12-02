@@ -68,3 +68,11 @@ void Piece::createValidMoves(){
 void Piece::updateValidMoves(Tile *tile, int num){
     validMoves[tile] = num;
 }
+
+void Piece::createUniqueStatus() {
+    uniqueStatus();
+}
+bool Piece::receiveUniqueStatus() {
+    return getUniqueStatus();
+}
+

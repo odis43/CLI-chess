@@ -23,6 +23,7 @@ public:
     int getCol();
     int getThreats(std::string player);
     void notify();
+    Piece *getPiece(); //return piece
 };
 
 #endif

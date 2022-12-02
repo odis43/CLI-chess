@@ -3,7 +3,7 @@
 #include "Board.h"
 using namespace std;
 
-King::King(string colour): Piece{colour, 10}{}
+King::King(string colour): Piece{colour, 10},castle{false}{}
 
 King::~King(){}
 
@@ -109,4 +109,11 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
             }
         }
     }
+}
+
+void King::uniqueStatus(){
+    this->castle = !this->castle;
+}
+void King::getUniqueStatus(){
+    return this->castle;
 }
