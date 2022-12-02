@@ -15,7 +15,7 @@ class Tile: public Observer {
 public:
     Tile(int row, int col);
     ~Tile();
-    void set(int row, int col, Piece *piece);
+    void set(Piece *piece);
     void remove();
     void setAll(std::vector<Piece *> pieces);
     int getStat();

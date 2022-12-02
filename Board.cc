@@ -22,11 +22,12 @@ void Board::setBoard(int row, int col) {
     }
 }
 
-void Board::setPiece(int row, int col, Piece *piece){
-    Tile *tile = theBoard[row][col].get()
-    piece->setBoard(this);
-    tile->setPiece(piece);
+void Board::setPiece(int row, int col, Piece* piece){
+    Tile* tile = theBoard[row][col].get();
+    tile->set(piece);
     piece->setTile(tile);
+    piece->setBoard(this);
+    
     auto ptr = make_unique<Piece>(piece);
     thePieces.emplace_back(move(ptr));
     if (piece->getColour() == "white") {
@@ -111,7 +112,7 @@ int Board::getScore(string colour) const {
     return theScore.at(colour);
 }
 
-TextDiplay* Board::getTextDisplay(){
+TextDisplay* Board::getTextDisplay(){
     return theTextDisplay.get();
 }
 

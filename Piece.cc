@@ -6,10 +6,18 @@
 #include "Tile.h"
 using namespace std;
 
-Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, val{val}, validMoves{map<Tile*, int>()}, board{nullptr}{}
+Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
 
 Piece::~Piece(){
-
+    if (theBoard) {
+        vector<vector<Tile*>> theTiles = theBoard->getBoardRef();
+        for (auto theRow:theTiles) {
+            for (auto theCell:theRow) {
+                this->detach(theCell);
+            }
+        }
+    }
+    this->detach(theBoard);
 }
 
 void Piece::setTile(Tile *t){
@@ -18,6 +26,21 @@ void Piece::setTile(Tile *t){
 
 Tile* Piece::getTile(){
     return this->tile;
+}
+
+void Piece::setBoard(Board* board){
+    theBoard = board;
+    vector<vector<Tile*>> theTiles = theBoard->getBoardRef();
+    for (auto theRow:theTiles) {
+        for (auto theTile:theRow) {
+            this->attach(theTile);
+        }
+    }
+    this->attach(theBoard);
+}
+
+Board* Piece::getBoard() {
+    return theBoard;
 }
 
 string Piece::getColour(){
@@ -67,6 +90,18 @@ void Piece::createValidMoves(){
 
 void Piece::updateValidMoves(Tile *tile, int num){
     validMoves[tile] = num;
+}
+
+Tile* Piece::getRandomMove(){
+    auto it = validMoves.begin();
+    advance(it, rand() % validMoves.size());
+    Tile* randomMove = it->first;
+    while (it->second == 3) {
+        it = validMoves.begin();
+        advance(it, rand() % validMoves.size());
+    }
+    randomMove = it->first;
+    return randomMove;
 }
 
 void Piece::createUniqueStatus() {

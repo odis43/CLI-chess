@@ -11,15 +11,15 @@ class Tile;
 class Board;
 
 class Piece: public Subject {
-    Tile *tile;
+    Tile* tile;
     string colour;
     int tracker;
     bool notMoved;
     int val;
     map<Tile*, int> validMoves;
-    Board *board;
+    Board* theBoard;
 
-    virtual void genMoves(vector<vector<Tile*>>, Tile *tile, int row, int col) = 0;
+    virtual void genMoves(vector<vector<Tile*>>, Tile* tile, int row, int col) = 0;
     virtual void print() = 0;
 
     virtual void uniqueStatus() = 0;
@@ -29,8 +29,8 @@ class Piece: public Subject {
         Piece(string colour, int val);
         virtual ~Piece();
 
-        Tile *getTile();
-        void setTile(Tile *tile);
+        Tile* getTile();
+        void setTile(Tile* tile);
         string getColour();
         int getTracker();
         void setTracker(int num);
@@ -38,11 +38,12 @@ class Piece: public Subject {
         int isValidMove(Tile* tile);
         map<Tile*, int>getValidMoves();
         void createValidMoves();
-        void updateValidMoves(Tile *tile, int num);
+        void updateValidMoves(Tile* tile, int num);
         void setNotMoved(bool b);
         bool getNotMoved();
-        Board *getBoard();
-        void setBoard(Board *b);
+        Board* getBoard();
+        void setBoard(Board* board);
+        Tile* getRandomMove();
         void notifyObservers();
         void createUniqueStatus();
         bool receiveUniqueStatus();
