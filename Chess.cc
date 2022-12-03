@@ -385,20 +385,34 @@ void Chess::setup(){
 }
 
 void Chess::createPlayers(std::vector<std::string> names){
-    string playerSide = 0; //white
-    for(auto player: names) {
-        if(player == "human") {
-            Human *newPlayer = new Human(playerSide);
+    string playerSideW = "white"; //white
+    string playerSideB = "black"; //white
+    int i = 0;
+    while (i < names.size()) {
+        if(names[i] == "human" && i == 0) {
+            Human* newPlayer = new Human(playerSideW);
             addPlayer(newPlayer);
         }
 
-        if(player == "computer1"){
-            Level1 *newPlayer = new Level1(playerSide);
+        if(names[i] == "human" && i == 1) {
+            Human* newPlayer = new Human(playerSideB);
             addPlayer(newPlayer);
         }
 
-        playerSide++; //black
+        if(names[i] == "computer" && i == 0) {
+            AI* newPlayer = new AI(playerSideW);
+            addPlayer(newPlayer);
+        }
+
+        if(names[i] == "computer" && i == 1) {
+            AI* newPlayer = new AI(playerSideB);
+            addPlayer(newPlayer);
+        }
+
+        i++;
     }
+
+
 }
 
 void Chess::winner(int l){
@@ -417,7 +431,7 @@ bool Chess::gameOver(){
         }
 
         cout << "Stalemate" << endl;
-        retrun true;
+        return true;
     }
 
     if (checkmate != -1) {
