@@ -20,7 +20,7 @@ Chess::Chess():Board{},check{-1},checkmate{-1},stalemate{false},numEachPiece{map
 
 Chess::~Chess(){}
 
-void Chess::pawnPromote(Pawn *p) {
+void Chess::pawnPromote(Piece *p) {
     vector<vector<Tile*>> board = getBoardRef();
     if(p->getColour() == "white" && !p->getStatus()) {
         Tile *curr = p->getTile();
