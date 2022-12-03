@@ -28,7 +28,7 @@ void Board::setPiece(int row, int col, Piece* piece){
     piece->setTile(tile);
     piece->setBoard(this);
     
-    auto ptr = make_unique<Piece>(piece);
+    auto ptr = unique_ptr<Piece>{piece};
     thePieces.emplace_back(move(ptr));
     if (piece->getColour() == "white") {
         thePlayers[0]->addPiece(piece);
@@ -73,7 +73,7 @@ int Board::getNumPlayers() const {
 
 void Board::addPlayer(Player *thePlayer) {
     thePlayer->setBoard(this);
-    thePlayers.emplace_back(make_unique<Player>(thePlayer));
+    thePlayers.emplace_back(unique_ptr<Player>{thePlayer});
 }
 
 Player* Board::getPlayer(int num) const {
@@ -89,7 +89,7 @@ int Board::getRound() const {
 }
 
 void Board::addMove(Move *theMove){
-    prevMoves.emplace_back(move(make_unique<Move>(theMove)));
+    prevMoves.emplace_back(move(unique_ptr<Move>{theMove}));
 }
 
 Move* Board::getMove(int num){
@@ -182,7 +182,7 @@ void Board::run(vector<string> playerNames){
             Tile* initialTile = theBoard[theirMove[2]][theirMove[3]].get();
             Tile* destTile = theBoard[theirMove[4]][theirMove[5]].get();
             Move* currMove = new Move(prevPiece, curPiece, initialTile, destTile, round);
-            prevMoves.emplace_back(make_unique<Move>(currMove));
+            prevMoves.emplace_back(unique_ptr<Move>{currMove});
 
             for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->setTracker(i);

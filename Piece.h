@@ -19,7 +19,7 @@ class Piece: public Subject {
     map<Tile*, int> validMoves;
     Board* theBoard;
 
-    virtual void genMoves(vector<vector<Tile*>>, Tile* tile, int row, int col) = 0;
+    virtual void genMoves(vector<vector<Tile*>> board, Tile* tile, int row, int col) = 0;
     virtual void print() = 0;
 
     virtual void castlingStatus() = 0;
