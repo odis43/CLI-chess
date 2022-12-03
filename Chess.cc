@@ -20,7 +20,7 @@ Chess::~Chess(){}
 
 void Chess::pawnPromote(Pawn *p) {
     vector<vector<Tile*>> board = getBoardRef();
-    if(p->getColor() == "white" && !p->getStatus()) {
+    if(p->getColour() == "white" && !p->getStatus()) {
         Tile *curr = p->getTile();
         Piece *newpiece;
         if(curr->getRow() == 0) {
@@ -114,53 +114,49 @@ void Chess::Castle(Piece *p) {
     int row = p->getTile()->getRow();
     int col = p->getTile()->getCol();
     if(row == 7 && col == 6) { //white king 
-        Tile *RookCell = board[7][7];
+        Tile *rookCell = board[7][7];
         Tile *newRookCell = board[7][5];
         Piece *rook = board[7][7]->getPiece();
         if(rook != nullptr && rook->getNotMoved()) {
             rookCell->remove();
             newRookCell->set(rook);
             Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
-            addMove
             addMove(move);
         }
     }
 
         if(row == 7 && col == 2) { 
-        Tile *RookCell = board[7][0];
+        Tile *rookCell = board[7][0];
         Tile *newRookCell = board[7][3];
         Piece *rook = board[7][0]->getPiece();
         if(rook != nullptr && rook->getNotMoved()) {
             rookCell->remove();
             newRookCell->set(rook);
             Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
-            addMove
             addMove(move);
         }
     }
 
         if(row == 0 && col == 6) { //black king
-        Tile *RookCell = board[0][7];
+        Tile *rookCell = board[0][7];
         Tile *newRookCell = board[7][5];
         Piece *rook = board[0][7]->getPiece();
         if(rook != nullptr && rook->getNotMoved()) {
             rookCell->remove();
             newRookCell->set(rook);
             Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
-            addMove
             addMove(move);
         }
     }
 
         if(row == 0 && col == 2) { //black side king 
-        Tile *RookCell = board[0][0];
+        Tile *rookCell = board[0][0];
         Tile *newRookCell = board[0][3];
         Piece *rook = board[0][0]->getPiece();
         if(rook != nullptr && rook->getNotMoved()) {
             rookCell->remove();
             newRookCell->set(rook);
             Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
-            addMove
             addMove(move);
         }
     }
@@ -257,7 +253,7 @@ vector<int> numPos(string position) {
 }
 
 //helper to modify pos
-void modifyPos(char ch, int col, int val) {
+void Chess::modifyPos(char ch, int col, int val) {
     string piece;
     switch(val) {
         case 1:

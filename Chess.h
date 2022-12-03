@@ -9,10 +9,12 @@ class Chess : public Board {
     bool stalemate;
     std::vector<Piece *> pieces;
     std::map<string,int> numEachPiece;
+    int resigned;
 
     //void modifyNumPos
     void pawnPromote(Pawn *p);
     void Castle(Piece *p);
+    void modifyPos(char ch, int col, int val);
 
     public:
         Chess();
