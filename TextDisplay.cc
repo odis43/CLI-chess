@@ -12,10 +12,6 @@ TextDisplay::TextDisplay(Board *board) : board{board} {}
 void TextDisplay::printBoard() {
     vector<vector<Tile *>> chessBoard = board->getBoardRef();
     cout << " ";
-    for (int i = 0; i < 8; i++) { // print out column headers
-        char character = i + 97;
-        cout << " " << character << " ";
-    }
     cout << endl;
     for (int i = 0; i < 8; i++) {
         cout << "  "; // place some padding
@@ -36,9 +32,14 @@ void TextDisplay::printBoard() {
         }
         cout << endl;
     }
-    cout << "   "; // add some more padding
+    cout << "  "; // add some more padding
     for (int i = 0; i < 8; i++) {
         cout << "-----";
+    }
+    cout << endl;
+    for (int i = 0; i < 8; i++) { // print out column headers
+        char character = i + 97;
+        cout << "    " << character;
     }
     cout << endl;
 }
