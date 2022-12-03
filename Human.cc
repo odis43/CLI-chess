@@ -31,22 +31,24 @@ vector<int> Human::moveCreate() {
         } else if (cmd == "move") { // if move,
             string initialPos; // this string holds initial position provided
             string destinationPos; // this string holds destination position provided
-            stringstream conversionTool; // used to convert strings to integers
-            int tempInt; // used to temporarily hold the integers that have been converted from strings
+            stringstream conversionTool1; // used to convert strings to integers
+            int tempInt1; // used to temporarily hold the integers that have been converted from strings
+            stringstream conversionTool2; // used to convert strings to integers
+            int tempInt2; // used to temporarily hold the integers that have been converted from strings
 
             iss >> initialPos; // reads second iss input into initalPos
             iss >> destinationPos; // reads third iss input into initalPos
 
-            conversionTool << initialPos[1]; // read integer string into conversionTool
-            conversionTool >> tempInt; // read conversionTool into tempInt, converting the string into integer value
-            int initialRow = 8 - tempInt; // gets row value
-            int initialCol = initialPos[0] - 97; // converts col value into integer
+            conversionTool1 << initialPos[1]; // read integer string into conversionTool
+            conversionTool1 >> tempInt1; // read conversionTool into tempInt, converting the string into integer value
+            int initialRow = 8 - tempInt1; // gets row value
+            int initialCol = int(initialPos[0]) - 97; // converts col value into integer
     
 
-            conversionTool << destinationPos[1]; // same as above but just with destinationPos
-            conversionTool >> tempInt;
-            int destinationRow = 8 - tempInt;
-            int destinationCol = destinationPos[0] - 97;
+            conversionTool2 << destinationPos[1]; // same as above but just with destinationPos
+            conversionTool2 >> tempInt2;
+            int destinationRow = 8 - tempInt2;
+            int destinationCol = int(destinationPos[0]) - 97;
 
             // Exception Handling
             try {
