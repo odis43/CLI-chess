@@ -489,10 +489,10 @@ int Chess::checkState(){
 void Chess::notify(){
     vector<vector<Tile*>> board = getBoardRef();
     pieces = getPiecesRef();
-    for(auto piece : all ){
+    for(auto piece : pieces){
         if(piece->getVal() == 10) {
             string color = piece->getColour();
-            if(piece->getTile()->getThreats(!color)){
+            if(piece->getTile()->getThreats("black")){
                 if(color == "white") this->check == 0;
                 if(color == "black") this->check == 1; 
             } else {
