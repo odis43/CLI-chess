@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <unordered_map>
 #include "Board.h"
+#include "Human.h"
 using namespace std;
 
 Chess::Chess():Board{},check{-1},checkmate{-1},stalemate{false},numEachPiece{map<string,int>()},resigned{-1}{}
@@ -335,7 +336,7 @@ void Chess::setup(){
                 iss >> position;
                 Piece *p = board[numPos(position)[0]][numPos(position)[1]]->getPiece();
                 if (p) {
-                    board[numPos(position)[0]][numPos(position)[1]]->removePiece();
+                    board[numPos(position)[0]][numPos(position)[1]]->remove();
                     modifyPos('-', p->getColour(), p->getVal());
                 }
             } catch (...) {
