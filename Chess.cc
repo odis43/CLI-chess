@@ -253,7 +253,7 @@ vector<int> numPos(string position) {
 }
 
 //helper to modify pos
-void Chess::modifyPos(char ch, string color, int val) {
+void Chess::modifyPos(char ch, string col, int val) {
     string piece;
     switch(val) {
         case 1:

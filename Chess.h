@@ -14,7 +14,7 @@ class Chess : public Board {
     //void modifyNumPos
     void pawnPromote(Pawn *p);
     void Castle(Piece *p);
-    void modifyPos(char ch, int col, int val);
+    void modifyPos(char ch, std::string col, int val);
 
     public:
         Chess();
