@@ -253,7 +253,7 @@ vector<int> numPos(string position) {
 }
 
 //helper to modify pos
-void Chess::modifyPos(char ch, int col, int val) {
+void Chess::modifyPos(char ch, string color, int val) {
     string piece;
     switch(val) {
         case 1:
@@ -275,7 +275,7 @@ void Chess::modifyPos(char ch, int col, int val) {
             piece = "WK";
             break;
     }
-    if (col) {
+    if (col == "white") {
         if (piece == "WP") piece = "BP";
         if (piece == "WKN") piece = "BKN";
         if (piece == "WB") piece = "BW";
@@ -286,19 +286,19 @@ void Chess::modifyPos(char ch, int col, int val) {
     if (ch == '+') {
         numEachPiece.find(piece)->second += 1;
     } else if (ch == '-') {
-        numEachPieced.find(piece)->second -= 1;
+        numEachPiece.find(piece)->second -= 1;
     }
 }
 
 void Chess::setup(){
     TextDisplay *dis = getTextDisplay();
-    if(getPlayerSize() == 0) {
+    if(getNumPlayers() == 0) {
         createPlayers({"human", "human"});
         initGame();
     }
 
     else {
-        dis->printBoard("chess", -1);
+        dis->printBoard();
     }
 
     string str;
@@ -312,7 +312,7 @@ void Chess::setup(){
             char piece;
             string position;
             iss >> piece >> position;
-            Piece *p = createPiece(piece);
+            Piece *p = returnPiece(piece);
             try {
                 if(p) {
                     //set the piece on the board using numPos
@@ -376,7 +376,7 @@ void Chess::setup(){
             }
         }
 
-        dis->printBoard("chess", -1);
+        dis->printBoard();
     }
 
     cout << "Setup done" << endl;
@@ -411,7 +411,7 @@ void Chess::winner(int l){
 
 bool Chess::gameOver(){
     if (stalemate) {
-        for (int i = 0;i < getPlayerSize(); i++) {
+        for (int i = 0;i < getNumPlayers(); i++) {
             string player;
             if(i == 0) player = "white";
             if(i == 1) player = "black";
@@ -432,7 +432,7 @@ bool Chess::gameOver(){
         cout << "Black is in checkmate" << endl;
     }
 
-    for (int i = 0;i < getPlayerSize(); i++) {
+    for (int i = 0;i < getNumPlayers(); i++) {
         if(i != checkmate) { //skips player that got checkmated
             if (i == 0) updateScore("white", 1);
             if (i == 1) updateScore("black", 1);
