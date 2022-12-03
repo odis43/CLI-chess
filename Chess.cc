@@ -434,22 +434,22 @@ bool Chess::gameOver(){
 
     if (checkmate != -1) {
         if(checkmate == 0) {
-        cout << "White is in checkmate" << endl;
-    }
-
-    if(checkmate == 1) {
-        cout << "Black is in checkmate" << endl;
-    }
-
-    for (int i = 0;i < getNumPlayers(); i++) {
-        if(i != checkmate) { //skips player that got checkmated
-            if (i == 0) updateScore("white", 1);
-            if (i == 1) updateScore("black", 1);
+            cout << "White is in checkmate" << endl;
         }
-    }
 
-    winner(checkmate);
-    return true;
+        if(checkmate == 1) {
+            cout << "Black is in checkmate" << endl;
+        }
+
+        for (int i = 0;i < getNumPlayers(); i++) {
+            if(i != checkmate) { //skips player that got checkmated
+                if (i == 0) updateScore("white", 1);
+                if (i == 1) updateScore("black", 1);
+            }
+        }
+
+        winner(checkmate);
+        return true;
     }
 
     else {
