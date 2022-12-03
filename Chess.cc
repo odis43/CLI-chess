@@ -258,32 +258,39 @@ vector<int> numPos(string position) {
 
 //helper to modify pos
 void modifyPos(char ch, int col, int val) {
-    int piece;
+    string piece;
     switch(val) {
         case 1:
-            piece = 5;
+            piece = "WP";
             break;
         case 3:
-            piece = 3;
+            piece = "WKN";
             break;
         case 4:
-            piece = 4;
+            piece = "WB";
             break;
         case 5:
-            piece = 2;
+            piece = "WR";
             break;
         case 9:
-            piece = 1;
+            piece = "WQ";
             break;
         case 10:
-            piece = 0;
+            piece = "WK";
             break;
     }
-    if (col) piece += 6; // black piece
+    if (col) {
+        if (piece == "WP") piece = "BP";
+        if (piece == "WKN") piece = "BKN";
+        if (piece == "WB") piece = "BW";
+        if (piece == "WR") piece = "BR";
+        if (piece == "WQ") piece = "BQ";
+        if (piece == "WK") piece = "BK";
+    }
     if (ch == '+') {
-        num_of[piece] += 1;
+        numEachPiece.find(piece)->second += 1;
     } else if (ch == '-') {
-        num_of[piece] -= 1;
+        numEachPieced.find(piece)->second -= 1;
     }
 }
 
