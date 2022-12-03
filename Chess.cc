@@ -399,7 +399,7 @@ void Chess::createPlayers(std::vector<std::string> names){
             addPlayer(newPlayer);
         }
 
-        if(names[i] == "computer" && i == 0) {
+        /*if(names[i] == "computer" && i == 0) {
             AI* newPlayer = new AI(playerSideW);
             addPlayer(newPlayer);
         }
@@ -407,12 +407,10 @@ void Chess::createPlayers(std::vector<std::string> names){
         if(names[i] == "computer" && i == 1) {
             AI* newPlayer = new AI(playerSideB);
             addPlayer(newPlayer);
-        }
+        } */
 
         i++;
     }
-
-
 }
 
 void Chess::winner(int l){
@@ -457,7 +455,7 @@ bool Chess::gameOver(){
     else {
         this->resigned = resign();
             if (this->resigned != -1) {
-                for (int i = 0; i < getPlayerSize(); ++i) {
+                for (int i = 0; i < getNumPlayers(); ++i) {
                     if (i != this->resigned) { // not the player that got checkmated
                         if (i == 0) updateScore("white", 1);
                         if (i == 1) updateScore("black", 1);
@@ -472,11 +470,8 @@ bool Chess::gameOver(){
 
 void Chess::printScore(){
     cout << "Final Score: " << endl;
-    if(scoreSize() < 2) cout << "No scores" << endl;
-    else {
         cout << "White: " << getScore("white") << endl;
         cout << "Black: " << getScore("black") << endl;
-    }
 }
 
 int Chess::checkState(){
@@ -493,12 +488,13 @@ int Chess::checkState(){
 
 void Chess::notify(){
     vector<vector<Tile*>> board = getBoardRef();
-    all = getPiecesRef();
+    pieces = getPiecesRef();
     for(auto piece : all ){
         if(piece->getVal() == 10) {
             string color = piece->getColour();
             if(piece->getTile()->getThreats(!color)){
-                this->check = color;
+                if(color == "white") this->check == 0;
+                if(color == "black") this->check == 1; 
             } else {
                 this->check = -1;
             }
@@ -513,7 +509,8 @@ void Chess::notify(){
                 }
                 noMove = true;
                 if(noMove == true) {
-                    checkmate = color;
+                    if(color == "white") this->checkmate == 0;
+                    if(color == "black") this->checkmate == 1; 
                 } else {
                     checkmate = -1;
                 }
@@ -522,12 +519,12 @@ void Chess::notify(){
             }
 
             if(piece->receiveUniqueStatus()) {
-                castle(piece);
+                Castle(piece);
             }            
             //pawn check
         } else if (piece->getVal() == 1) {
             if(piece->getTile()->getRow() == 0 || piece->getTile()->getRow() == 7) {
-                promote(piece);
+                pawnPromote(piece);
             }
         }
     }
