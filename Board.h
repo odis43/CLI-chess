@@ -42,7 +42,7 @@ class Board: public Observer {
     //Check if game is done
     virtual bool gameOver() = 0;
     //Check if game is in a valid state
-    virtual bool gameState() = 0;
+    virtual int checkState() = 0;
     //Generates players
     virtual void createPlayers(vector<string> playerNames) = 0;
 

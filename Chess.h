@@ -26,7 +26,7 @@ class Chess : public Board {
         bool gameOver();
         void printScore();
         void notify();
-        int checkState(); //not valid when king is in check   
+        int checkState() override; //not valid when king is in check   
 };
 
 #endif
