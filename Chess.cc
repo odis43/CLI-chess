@@ -12,6 +12,7 @@
 #include <stdexcept>
 #include <unordered_map>
 #include "Board.h"
+#include "Level1.h"
 #include "Human.h"
 using namespace std;
 
@@ -392,12 +393,7 @@ void Chess::createPlayers(std::vector<std::string> names){
         }
 
         if(player == "computer1"){
-            LevelOne *newPlayer = new LevelOne(playerSide);
-            addPlayer(newPlayer);
-        }
-
-        if(player == "computer2") {
-            LevelTwo *newPlayer = new LevelTwo(playerSide);
+            Level1 *newPlayer = new Level1(playerSide);
             addPlayer(newPlayer);
         }
 
