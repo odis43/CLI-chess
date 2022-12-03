@@ -158,6 +158,7 @@ void Board::run(vector<string> playerNames){
 
     while(inPlay){
         if (gameOver()) {
+            cout << "Board.cc: Line 161, this shouldn't run" << endl;
             inPlay = false;
             break;
         }
