@@ -182,7 +182,7 @@ void Chess::initGame(){
     setBoard(8,8);
 
     //set the kings
-    setPiece(7,3,new King("white")); //white king
+    setPiece(7,4,new King("white")); //white king
     numEachPiece.find("WK")->second = 1;
     setPiece(0,4,new King("black"));
     numEachPiece.find("BK")->second = 1;
@@ -190,7 +190,7 @@ void Chess::initGame(){
     //set the Queens (slay)
     setPiece(7,3,new Queen("white"));
     numEachPiece.find("WQ")->second = 1;
-    setPiece(0, 3, new Queen("black"));
+    setPiece(0,3,new Queen("black"));
     numEachPiece.find("BQ")->second = 1;
 
     //set bishops
