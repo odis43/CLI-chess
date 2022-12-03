@@ -14,6 +14,7 @@ class Bishop: public Piece {
 
         void castlingStatus() override;
         bool getCastlingStatus() override;
+         bool getStatus() override;
 };
 
 #endif
