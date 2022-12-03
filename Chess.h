@@ -12,7 +12,7 @@ class Chess : public Board {
     int resigned;
 
     //void modifyNumPos
-    void pawnPromote(Pawn *p);
+    void pawnPromote(Piece *p);
     void Castle(Piece *p);
     void modifyPos(char ch, std::string col, int val);
 
