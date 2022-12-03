@@ -7,8 +7,8 @@ using namespace std;
 
 int main(){
     string s;
-    Chess *theChess = new Chess();
-    auto chessGame = make_unique<Chess>(theChess);
+    //Chess *theChess = new Chess();
+    auto chessGame = make_unique<Chess>();
     while (getline(cin, s)) {
         string command;
         istringstream ss{s};
