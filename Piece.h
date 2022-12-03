@@ -24,6 +24,7 @@ class Piece: public Subject {
 
     virtual void castlingStatus() = 0;
     virtual bool getCastlingStatus() = 0;
+    virtual bool getStatus() = 0;
 
     public:
         Piece(string colour, int val);

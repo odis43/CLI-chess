@@ -13,9 +13,8 @@ class Pawn : public Piece {
         ~Pawn();
         void genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, int col);
         void setStatus();
-        bool getStatus();
+        bool getStatus() override;
         void print() override;
-
         void castlingStatus() override;
         bool getCastlingStatus() override;
 };
