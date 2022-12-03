@@ -48,9 +48,9 @@ Piece* Board::getPiece(int tracker) const {
 
 vector<vector<Tile*>> Board::getBoardRef() const {
     vector<vector<Tile*>> boardRef;
-    for (int i = 0; i < theBoard.size(); ++i) {
+    for (int i = 0; i < (int) theBoard.size(); ++i) {
         vector<Tile*> rowRef;
-        for (int j = 0; j < theBoard.at(i).size(); j++) {
+        for (int j = 0; j < (int) theBoard.at(i).size(); j++) {
             rowRef.emplace_back(theBoard[i][j].get());
         }
         boardRef.emplace_back(rowRef);
@@ -60,7 +60,7 @@ vector<vector<Tile*>> Board::getBoardRef() const {
 
 vector<Piece*> Board::getPiecesRef() const {
     vector<Piece*> pieces;
-    for (int i = 0; i < thePieces.size(); i++) {
+    for (int i = 0; i < (int) thePieces.size(); i++) {
         Piece* thePiece = thePieces.at(i).get();
         pieces.emplace_back(thePiece);
     }
@@ -143,15 +143,15 @@ void Board::run(vector<string> playerNames){
         initGame();
     }
 
-    for (int i = 0; i < thePieces.size(); i++){
+    for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->setTracker(i);
         thePieces[i]->createValidMoves();
         thePieces[i]->notifyObservers();
     }
 
     // Connects each tile to a piece
-    for (int i = 0; i < theBoard.size(); i++){
-        for (int j = 0; j < theBoard.at(i).size(); j++){
+    for (int i = 0; i < (int) theBoard.size(); i++){
+        for (int j = 0; j < (int) theBoard.at(i).size(); j++){
             theBoard[i][j]->setAll(getPiecesRef());
         }
     }
@@ -184,13 +184,13 @@ void Board::run(vector<string> playerNames){
             Move* currMove = new Move(prevPiece, curPiece, initialTile, destTile, round);
             prevMoves.emplace_back(make_unique<Move>(currMove));
 
-            for (int i = 0; i < thePieces.size(); i++){
+            for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->setTracker(i);
                 thePieces[i]->createValidMoves();
                 thePieces[i]->notifyObservers();
             }
 
-            if (gameState()) {
+            if (checkState()) {
                 if (playerTurn == "white") {
                     playerTurn = "black";
                 } else if (playerTurn == "black") {
