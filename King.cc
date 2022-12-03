@@ -112,8 +112,8 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
 }
 
 void King::castlingStatus(){
-    this->castle = !this->castle;
+    castle = !castle;
 }
 bool King::getCastlingStatus(){
-    return this->castle;
+    return castle;
 }

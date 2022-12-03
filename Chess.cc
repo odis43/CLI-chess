@@ -492,11 +492,11 @@ void Chess::notify(){
     for(auto piece : pieces){
         if(piece->getVal() == 10) {
             string color = piece->getColour();
-            if(piece->getTile()->getThreats("black")){
-                if(color == "white") this->check == 0;
-                if(color == "black") this->check == 1; 
+            if(piece->getTile()->getThreats(0)){
+                if(color == "white") check == 0;
+                if(color == "black") check == 1; 
             } else {
-                this->check = -1;
+                check = -1;
             }
 
     //checkmate check!!!
@@ -509,8 +509,8 @@ void Chess::notify(){
                 }
                 noMove = true;
                 if(noMove == true) {
-                    if(color == "white") this->checkmate == 0;
-                    if(color == "black") this->checkmate == 1; 
+                    if(color == "white") checkmate == 0;
+                    if(color == "black") checkmate == 1; 
                 } else {
                     checkmate = -1;
                 }

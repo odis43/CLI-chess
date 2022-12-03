@@ -57,22 +57,22 @@ void Tile::notify() {
 
     numThreats.clear();
     for(auto piece: pieces) {
-        if(piece->getVal() == 1 && piece->getColour == "black"){
+        if(piece->getVal() == 1 && piece->getColour() == "black"){
             if (piece->getTile()->getRow() == this->row - 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
-                if(numThreats.count(1)) numThreats[1]++;
-                else numThreats[1] = 1;
+                if(numThreats.count("black")) numThreats["black"]++;
+                else numThreats["black"] = 1;
             }
         }
 
-        if(piece->getVal() == 1 && piece->getColour == "white"){
+        if(piece->getVal() == 1 && piece->getColour() == "white"){
             if (piece->getTile()->getRow() == this->row + 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
-                if(numThreats.count(0)) numThreats[0]++;
-                else numThreats[0] = 0;
+                if(numThreats.count("white")) numThreats["white"]++;
+                else numThreats["white"] = 0;
             }
         }
 
         if(piece->isValidMove(this)) {
-            int curr = piece->getColour();
+            string curr = piece->getColour();
 
             if(numThreats.count(curr)) numThreats[curr]++;
             else numThreats[curr] = 1;

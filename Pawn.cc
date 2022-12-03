@@ -68,3 +68,7 @@ void Pawn::print() {
         cout << "P";
     }
 }
+
+void Pawn::castlingStatus(){}
+bool Pawn::getCastlingStatus() { return false; }
+

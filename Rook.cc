@@ -68,7 +68,7 @@ void Rook::moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Ti
     }
 }
 
-void Rook::moveRight(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
+void Rook::moveLeft(int row, int col, std::vector<std::vector<Tile*>> board, Tile *tile) {
     int newCol = col - 1;
     while(newCol >= 0) {
         Piece *tilePiece = board[row][newCol]->getPiece();
@@ -93,3 +93,6 @@ void Rook::genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, 
     moveLeft(row, col, board, tile);
     moveRight(row, col, board, tile);
 }
+
+void Rook::castlingStatus(){}
+bool Rook::getCastlingStatus() { return false; }

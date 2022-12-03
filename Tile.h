@@ -12,7 +12,7 @@ class Tile: public Observer {
     int row, col;
     Piece *piece;
     int status;
-    std::map<std::string, int> numThreats;
+    std::map<string, int> numThreats;
     std::vector<Piece*> pieces;
 public:
     Tile(int row, int col);
@@ -23,7 +23,7 @@ public:
     int getStat();
     int getRow();
     int getCol();
-    int getThreats(std::string player);
+    int getThreats(std::string p);
     void notify();
     Piece *getPiece(); //return piece
 };

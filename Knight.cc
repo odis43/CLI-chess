@@ -68,3 +68,7 @@ void Knight::print() {
     if(getColour() == "black") cout << "k";
 }
 
+
+void Knight::castlingStatus(){}
+bool Knight::getCastlingStatus() { return false; }
+

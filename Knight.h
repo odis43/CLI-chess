@@ -11,9 +11,8 @@ class Knight : public Piece {
         void genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, int col);
         void print() override;
 
-        void castlingStatus() override;
-        bool getCastlingStatus() override;
-        bool getStatus() override;
+        void castlingStatus();
+        bool getCastlingStatus();
 };
 
 #endif

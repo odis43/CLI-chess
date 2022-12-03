@@ -167,3 +167,7 @@ void Queen::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
         }      
     }
 }
+
+void Queen::castlingStatus(){}
+bool Queen::getCastlingStatus() { return false; }
+
