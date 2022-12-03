@@ -64,8 +64,8 @@ void Knight::genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row
 }
 
 void Knight::print() {
-    if(getColour() == "white") cout << "K";
-    if(getColour() == "black") cout << "k";
+    if(getColour() == "white") cout << "N";
+    if(getColour() == "black") cout << "n";
 }
 
 
