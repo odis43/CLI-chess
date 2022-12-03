@@ -22,7 +22,7 @@ Chess::~Chess(){}
 
 void Chess::pawnPromote(Piece *p) {
     vector<vector<Tile*>> board = getBoardRef();
-    if(p->getColour() == "white" && !p->getStatus()) {
+    if(p->getColour() == "white") {
         Tile *curr = p->getTile();
         Piece *newpiece;
         if(curr->getRow() == 0) {
@@ -66,7 +66,7 @@ void Chess::pawnPromote(Piece *p) {
         }
     }
 
-    if(p->getColour() == "black" && !p->getStatus()) {
+    if(p->getColour() == "black") {
         Tile *curr = p->getTile();
         Piece *newpiece;
         if(curr->getRow() == 7) {
