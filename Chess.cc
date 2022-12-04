@@ -213,8 +213,8 @@ void Chess::initGame(){
     setPiece(7, 0, new Rook("white")); 
     setPiece(7, 7, new Rook("white")); 
     numEachPiece.find("WR")->second = 2;
-    setPiece(0, 0, new Knight("black")); 
-    setPiece(0, 7, new Knight("black")); 
+    setPiece(0, 0, new Rook("black")); 
+    setPiece(0, 7, new Rook("black")); 
     numEachPiece.find("BR")->second = 2;
 
     //set pawns
