@@ -67,7 +67,7 @@ vector<int> Human::moveCreate() {
                 if (own(currentPiece) == false) throw out_of_range("Reason: You do not own that piece");
                 
                 // Check if the ending destination is a valid move for the piece at initial tile
-                if (currentPiece->isValidMove(testDestination) == 1) throw out_of_range("Reason: No valid moves lead there");
+                if (currentPiece->isValidMove(testDestination) == 0) throw out_of_range("Reason: No valid moves lead there");
 
                 // Now we actually move
                 // First, remove piece from initial tile

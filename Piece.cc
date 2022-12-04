@@ -6,7 +6,7 @@
 #include "Tile.h"
 using namespace std;
 
-Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, notMoved{false},val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
+Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, notMoved{true},val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
 
 Piece::~Piece(){
     if (theBoard) {
