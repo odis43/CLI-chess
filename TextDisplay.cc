@@ -15,8 +15,8 @@ void TextDisplay::printBoard() {
     cout << endl;
     for (int i = 0; i < 8; i++) {
         cout << "  "; // place some padding
-        for (int j = 0; j < 8; j++) {
-            cout << "-----";
+        for (int j = 0; j < 33; j++) {
+            cout << "-";
         }
         cout << endl;
         cout << 8 - i << " "; // print row number
@@ -28,18 +28,20 @@ void TextDisplay::printBoard() {
             } else {
                 cout << " ";
             }
-            cout << " |";
+            cout << " ";
         }
+        cout << "|";
         cout << endl;
     }
     cout << "  "; // add some more padding
-    for (int i = 0; i < 8; i++) {
-        cout << "-----";
+    for (int i = 0; i < 33; i++) {
+        cout << "-";
     }
     cout << endl;
+    cout << " ";
     for (int i = 0; i < 8; i++) { // print out column headers
         char character = i + 97;
-        cout << "    " << character;
+        cout << "   " << character;
     }
     cout << endl;
 }
