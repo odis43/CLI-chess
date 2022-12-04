@@ -8,7 +8,7 @@ using namespace std;
 
 Board::Board(): theBoard{vector<vector<unique_ptr<Tile>>>()}, thePieces{vector<unique_ptr<Piece>>()}, 
 thePlayers{vector<unique_ptr<Player>>()}, round{0}, playerTurn{"white"}, 
-inPlay{true}, theScore{vector<float>()}, theTextDisplay{make_unique<TextDisplay>(this)} {}
+inPlay{true}, theTextDisplay{make_unique<TextDisplay>(this)} {}
 
 Board::~Board(){}
 

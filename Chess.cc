@@ -388,7 +388,7 @@ void Chess::createPlayers(std::vector<std::string> names){
     string playerSideW = "white"; //white
     string playerSideB = "black"; //white
     int i = 0;
-    while (i < names.size()) {
+    while (i < (int) names.size()) {
         if(names[i] == "human" && i == 0) {
             Human* newPlayer = new Human(playerSideW);
             addPlayer(newPlayer);
@@ -493,8 +493,8 @@ void Chess::notify(){
         if(piece->getVal() == 10) {
             string color = piece->getColour();
             if(piece->getTile()->getThreats(0)){
-                if(color == "white") check == 0;
-                if(color == "black") check == 1; 
+                if(color == "white") check = 0;
+                if(color == "black") check = 1; 
             } else {
                 check = -1;
             }
@@ -509,8 +509,8 @@ void Chess::notify(){
                 }
                 noMove = true;
                 if(noMove == true) {
-                    if(color == "white") checkmate == 0;
-                    if(color == "black") checkmate == 1; 
+                    if(color == "white") checkmate = 0;
+                    if(color == "black") checkmate = 1; 
                 } else {
                     checkmate = -1;
                 }
