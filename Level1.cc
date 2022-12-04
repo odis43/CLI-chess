@@ -5,6 +5,7 @@
 #include "Tile.h"
 #include "Piece.h"
 #include "Board.h"
+#include <vector>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ std::vector<int> Level1::moveCreate() {
                 for (int j = 0; j < 8; j++) {
                     Piece *myPiece = curBoard.at(i).at(j)->getPiece(); // get each piece in the board
                     
-                    if (!myPiece && myPiece->getColour() == getColour()) { // if belonging to my colour and existent
+                    if (myPiece && myPiece->getColour() == getColour()) { // if belonging to my colour and existent
                         myPieces.emplace_back(myPiece); // add to my list of available pieces to move
                     }
                 }
