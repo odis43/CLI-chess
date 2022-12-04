@@ -57,31 +57,43 @@ void Tile::notify() {
 
     numThreats.clear();
     for(auto piece: pieces) {
-        if(piece->getVal() == 1 && piece->getColour() == "black"){
-            if (piece->getTile()->getRow() == this->row - 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
-                if(numThreats.count("black")) numThreats["black"]++;
-                else numThreats["black"] = 1;
-            }
+        if(piece->getVal() == 1){
+            if(piece->getColour() == "black"){
+                if (piece->getTile()->getRow() == this->row - 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
+                if(numThreats.count("black")) {
+                    numThreats["black"]++;
+                } else {
+                    numThreats["black"] = 1;
+                }
+            }   
+            } else if(piece->getColour() == "white"){
+                if (piece->getTile()->getRow() == this->row + 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
+                    if(numThreats.count("white")) {
+                        numThreats["white"]++;
+                    } else {
+                        numThreats["white"] = 1;
+                }
+            } 
         }
 
-        if(piece->getVal() == 1 && piece->getColour() == "white"){
-            if (piece->getTile()->getRow() == this->row + 1 && piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1) {
-                if(numThreats.count("white")) numThreats["white"]++;
-                else numThreats["white"] = 0;
-            }
-        }
-
-        if(piece->isValidMove(this)) {
+        } else if(piece->isValidMove(this)) {
             string curr = piece->getColour();
 
-            if(numThreats.count(curr)) numThreats[curr]++;
-            else numThreats[curr] = 1;
-        }
-        
-    }
+            if(numThreats.count(curr)) {
+                numThreats[curr]++;
+            } else{
+                numThreats[curr] = 1;
+            } 
+        }    
+}
+
 }
 
 Piece* Tile::getPiece() {
     return this->piece;
 }
+
+
+
+
 

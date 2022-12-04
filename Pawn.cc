@@ -12,24 +12,25 @@ void Pawn::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col) {
         cout << "not moved" << endl;
         int newRow = row - 2;
         if(getColour() == "white") {
-            newRow = row + 2;
+            int newRow = row + 2;
         }
 
         if(newRow < 8 && newRow >= 0) {
             Piece *tilePiece = board[newRow][col]->getPiece();
-            if(!tilePiece) {
+            if(tilePiece == nullptr) {
                 updateValidMoves(board[newRow][col],4);
             }
         }
-    } else {
-        int newRow = row - 1;
-        if(getColour() == "white") {
-            newRow = row + 1;
+    } 
+
+    int newRow = row - 1;
+    if(getColour() == "white") {
+            int newRow = row + 1;
         }
 
         if(row - 1 >= 0 && row + 1 < 8){
             Piece *tilePiece = board[newRow][col]->getPiece();
-            if(!tilePiece) {
+            if(tilePiece == nullptr) {
                 updateValidMoves(board[newRow][col], 1);
             }
             int newColLeft = col - 1;
@@ -50,8 +51,6 @@ void Pawn::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col) {
             }
         }
     }
-
-}
 
 bool Pawn::getStatus() {
     return isPromoted && hasTwoStepped;
