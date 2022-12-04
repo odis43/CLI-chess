@@ -6,11 +6,11 @@
 #include "Player.h"
 
 class Human : public Player {
+private:
+    std::vector<int> moveCreate() override; // creates move info
 public:
     Human(std::string colour); // constructor
     ~Human(); // destructor
-
-    std::vector<int> moveCreate() override; // creates move
 };
 
 #endif
