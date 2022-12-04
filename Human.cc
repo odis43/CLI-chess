@@ -16,7 +16,7 @@ Human::Human(string colour) : Player{colour} {}
 Human::~Human() {}
 
 // Creates player move based on input
-vector<int> Human::moveCreate() {
+vector<int> Human::moveCreate() {   
     vector<vector<Tile *>> curBoard = getBoard()->getBoardRef(); // holds a reference to the board
     string input; // reads user provided input
 

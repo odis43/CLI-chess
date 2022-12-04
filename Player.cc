@@ -42,7 +42,7 @@ void Player::setBoard(Board *boardInput) {
 
 // Sets value of resign
 void Player::setResign(bool resignInput) {
-    resign = resignInput;
+    this->resign = resignInput;
 }
 
 // Activates moveCreate private method

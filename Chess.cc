@@ -456,12 +456,12 @@ bool Chess::gameOver(){
         this->resigned = resign();
             if (this->resigned != 0) {
                 for (int i = 0; i < getNumPlayers(); ++i) {
-                    if (i != this->resigned) { // not the player that got checkmated
+                    if (i == this->resigned) { // not the player that got checkmated
                         if (i == 0) updateScore("white", 1);
                         if (i == 1) updateScore("black", 1);
                     }
                 }
-                winner(this->resigned);
+                winner(!this->resigned);
                 return true;
         }
         return false;
