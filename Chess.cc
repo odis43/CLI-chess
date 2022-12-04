@@ -399,15 +399,15 @@ void Chess::createPlayers(std::vector<std::string> names){
             addPlayer(newPlayer);
         }
 
-        /*if(names[i] == "computer" && i == 0) {
-            AI* newPlayer = new AI(playerSideW);
+        if(names[i] == "computer" && i == 0) {
+            Level1* newPlayer = new Level1(playerSideW);
             addPlayer(newPlayer);
         }
 
         if(names[i] == "computer" && i == 1) {
-            AI* newPlayer = new AI(playerSideB);
+            Level1* newPlayer = new Level1(playerSideB);
             addPlayer(newPlayer);
-        } */
+        } 
 
         i++;
     }
