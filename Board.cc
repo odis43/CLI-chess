@@ -8,7 +8,7 @@ using namespace std;
 
 Board::Board(): theBoard{vector<vector<unique_ptr<Tile>>>()}, thePieces{vector<unique_ptr<Piece>>()}, 
 thePlayers{vector<unique_ptr<Player>>()}, round{0}, playerTurn{"white"}, 
-inPlay{true}, theTextDisplay{make_unique<TextDisplay>(this)} {}
+inPlay{true}, theScore{vector<float>()}, theTextDisplay{make_unique<TextDisplay>(this)} {}
 
 Board::~Board(){}
 
@@ -100,16 +100,20 @@ Move* Board::getMove(int num){
     }
 }
 
-void Board::updateScore(string colour, int point){
-    if (theScore.count(colour)) {
-        theScore[colour] = theScore[colour] + point;
+void Board::updateScore(string colour, float point){
+    if (colour == "white") {
+        theScore[0] += point;
     } else {
-        theScore.insert({colour, point});
+        theScore[1] += point;
     }
 }
 
 int Board::getScore(string colour) const {
-    return theScore.at(colour);
+    if (colour == "white") {
+        return theScore[0];
+    } else {
+        return theScore[1];
+    }
 }
 
 TextDisplay* Board::getTextDisplay(){
@@ -141,6 +145,8 @@ void Board::run(vector<string> playerNames){
         inPlay = true;
         createPlayers(playerNames);
         initGame();
+        theScore.emplace_back(0);
+        theScore.emplace_back(0);
         theTextDisplay->printBoard();
     }
 
