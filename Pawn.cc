@@ -9,6 +9,7 @@ Pawn::~Pawn(){}
 void Pawn::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col) {
     //for two step
     if(getNotMoved() == true) {
+        cout << "not moved" << endl;
         int newRow = row - 2;
         if(getColour() == "white") {
             newRow = row + 2;

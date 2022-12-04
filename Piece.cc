@@ -6,7 +6,7 @@
 #include "Tile.h"
 using namespace std;
 
-Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
+Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, notMoved{false},val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
 
 Piece::~Piece(){
     if (theBoard) {
@@ -72,11 +72,11 @@ int Piece::isValidMove(Tile *tile){
 }
 
 void Piece::setNotMoved(bool b){
-    notMoved = b;
+    this->notMoved = b;
 }
 
 bool Piece::getNotMoved(){
-    return notMoved;
+    return this->notMoved;
 }
 
 map<Tile*, int> Piece::getValidMoves(){
