@@ -34,7 +34,7 @@ class Board: public Observer {
     //Text Display
     unique_ptr<TextDisplay> theTextDisplay;
     //Maps the player to their score
-    map<string, int> theScore;
+    vector<float> theScore;
     //Resets the board
     void resetGame();
     //Starts game by initializing board
@@ -54,7 +54,7 @@ class Board: public Observer {
         void addPlayer(Player *thePlayer);
         Player *getPlayer(int num) const;
         int getNumPlayers() const;
-        void updateScore(string colour, int point);
+        void updateScore(string colour, float point);
         int getScore(string colour) const;
         void setPlayerTurn(string colour);
         void addMove(Move *theMove);

@@ -7,7 +7,6 @@ using namespace std;
 
 int main(){
     string s;
-    //Chess *theChess = new Chess();
     auto chessGame = make_unique<Chess>();
     cout << "Welcome to Chess!" << endl;
     cout << "Please enter 'game human human', 'setup', or 'quit'" << endl;
@@ -21,6 +20,7 @@ int main(){
             while (ss >> playerName){
                 playerNames.emplace_back(playerName);
             }
+            
             chessGame->run(playerNames);
         } else if (command == "setup") {
             chessGame->setup();
