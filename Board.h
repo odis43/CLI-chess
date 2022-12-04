@@ -68,7 +68,7 @@ class Board: public Observer {
         bool resign();
         virtual void setup() = 0;
         void run(vector<string> playerNames);
-        TextDisplay* getTextDisplay();
+        TextDisplay *getTextDisplay();
         virtual void notify() = 0;
 };
 
