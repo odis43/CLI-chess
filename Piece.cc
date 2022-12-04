@@ -6,7 +6,7 @@
 #include "Tile.h"
 using namespace std;
 
-Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, notMoved{true},val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
+Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, notMoved{true}, val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
 
 Piece::~Piece(){
     if (theBoard) {
@@ -98,18 +98,18 @@ void Piece::updateValidMoves(Tile *tile, int num){
 
 Tile* Piece::getRandomMove(){
     auto it = validMoves.begin();
-    advance(it, rand() % validMoves.size());
-    Tile* randomMove = it->first;
-    while (it->second == 3) {
-        it = validMoves.begin();
+    do {
+        auto it = validMoves.begin();
         advance(it, rand() % validMoves.size());
-    }
-    randomMove = it->first;
+    } while (it->second == 3); //if the move is 3, path is blocked
+
+    Tile* randomMove = it->first;
     return randomMove;
 }
 
 
 void Piece::castlingStatus(){}
+
 bool Piece::getCastlingStatus() { return false; }
 
 void Piece::createUniqueStatus() {
@@ -122,4 +122,3 @@ bool Piece::receiveUniqueStatus() {
 bool Piece::getStatus() {return false;}
 
 void Piece::notifyObservers(){}
-
