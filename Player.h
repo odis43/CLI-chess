@@ -20,10 +20,10 @@ public:
     Player(std::string colour); // constructor
     virtual ~Player(); // destructor
     
-    void addPiece(Piece *); // adds pieces
-    void removePiece(Piece *); // removes pieces
+    void addPiece(Piece *piece); // adds pieces
+    void removePiece(Piece *piece); // removes pieces
     std::vector<Piece *> getPieces(); // returns pieces
-    bool own(Piece *); // returns true if piece is owned by Player object
+    bool own(Piece *piece); // returns true if piece is owned by Player object
     void setBoard(Board *boardInput); // sets the current value of board
     void setResign(bool resignInput); // sets current value of resign
     std::vector<int> move(); // activates moveCreate
