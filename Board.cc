@@ -46,7 +46,7 @@ Piece* Board::getPiece(int tracker) const {
     return nullptr;
 }
 
-vector<vector<Tile*>> Board::getBoardRef() const {
+vector<vector<Tile*>> Board::getBoardRef() {
     vector<vector<Tile*>> boardRef;
     for (int i = 0; i < (int) theBoard.size(); ++i) {
         vector<Tile*> rowRef;
@@ -58,7 +58,7 @@ vector<vector<Tile*>> Board::getBoardRef() const {
     return boardRef;
 }
 
-vector<Piece*> Board::getPiecesRef() const {
+vector<Piece*> Board::getPiecesRef() {
     vector<Piece*> pieces;
     for (int i = 0; i < (int) thePieces.size(); i++) {
         Piece* thePiece = thePieces.at(i).get();
@@ -154,6 +154,13 @@ void Board::run(vector<string> playerNames){
         thePieces[i]->setTracker(i);
     }
 
+    // Connects each tile to a piece
+    for (int i = 0; i < (int) theBoard.size(); i++){
+        for (int j = 0; j < (int) theBoard.at(i).size(); j++){
+            theBoard[i][j]->setAll(getPiecesRef());
+        }
+    }
+
     for (int i = 0; i < (int) thePieces.size(); i++){
         if (thePieces[i]->getVal() != 10){
             thePieces[i]->createValidMoves();
@@ -162,18 +169,12 @@ void Board::run(vector<string> playerNames){
 
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->notifyObservers();
+        cout << "test1" << endl;
     }
 
     for (int i = 0; i < (int) thePieces.size(); i++){
         if (thePieces[i]->getVal() == 10){
             thePieces[i]->createValidMoves();
-        }
-    }
-
-    // Connects each tile to a piece
-    for (int i = 0; i < (int) theBoard.size(); i++){
-        for (int j = 0; j < (int) theBoard.at(i).size(); j++){
-            theBoard[i][j]->setAll(getPiecesRef());
         }
     }
 
@@ -210,7 +211,6 @@ void Board::run(vector<string> playerNames){
                     thePieces[i]->createValidMoves();
                 }
             }
-
             for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->notifyObservers();
             }
