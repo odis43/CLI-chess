@@ -16,7 +16,7 @@ void Board::setBoard(int row, int col) {
     for (int i = 0; i < row; ++i) {
         vector<unique_ptr<Tile>> theRow;
         for (int j = 0; j < col; ++j) {
-            theRow.emplace_back(make_unique<Tile>(i,j));
+            theRow.emplace_back(unique_ptr<Tile>{new Tile(i,j)});
         }
         theBoard.emplace_back(move(theRow));
     }
@@ -38,6 +38,9 @@ void Board::setPiece(int row, int col, Piece* piece){
 }
 
 Piece* Board::getPiece(int tracker) const {
+    if (tracker == -1) {
+        return nullptr;
+    }
     for (auto &thePiece:thePieces) {
         if (thePiece->getTracker() == tracker) {
             return thePiece.get();
