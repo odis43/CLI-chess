@@ -486,27 +486,33 @@ int Chess::checkState(){
 }
 
 void Chess::notify(){
+    //check = 0 for white in check, 1 for black
     vector<vector<Tile*>> board = getBoardRef();
     pieces = getPiecesRef();
     for(auto piece : pieces){
-        if(piece->getVal() == 10) {
+        if(piece->getVal() == 10) { //king
             string color = piece->getColour();
-            if(piece->getTile()->getThreats("white")){
-                check = 1; 
-            } else if (piece->getTile()->getThreats("black")) {
-                check = 0;
-            } else {
-                check = -1;
+            if (color == "white") { //king piece is white
+                if(piece->getTile()->getThreats("black")) {
+                    check = 0;
+                } else {
+                    check = -1;
+                }
+            } else if (color == "black") {
+                if(piece->getTile()->getThreats("white")) {
+                    check = 1;
+                } else {
+                    check = -1;
+                }
             }
 
             if(check != -1) { //checkmate check!!!
-                bool noMove;
+                bool noMove = true;
                 for(auto p : piece->getValidMoves()) {
                     if(p.second != 3) {
                         noMove = false;
                     }
                 }
-                noMove = true;
                 if(noMove == true) {
                     if(color == "white") checkmate = 0;
                     if(color == "black") checkmate = 1; 
