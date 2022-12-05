@@ -121,4 +121,14 @@ bool Piece::receiveUniqueStatus() {
 
 bool Piece::getStatus() {return false;}
 
-void Piece::notifyObservers(){}
+void Piece::notifyObservers(){
+    /*
+    vector<vector<Tile*>> tiles = theBoard->getBoardRef();
+    for (auto theRow:tiles) {
+        for (auto theTile:theRow) {
+            theTile->notify();
+        }
+    }
+    theBoard->notify();
+    */
+}

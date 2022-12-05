@@ -489,12 +489,15 @@ int Chess::checkState(){
 void Chess::notify(){
     vector<vector<Tile*>> board = getBoardRef();
     pieces = getPiecesRef();
+    cout << "test2" << endl;
     for(auto piece : pieces){
         if(piece->getVal() == 10) {
+            cout << "test" << endl;
             string color = piece->getColour();
-            if(piece->getTile()->getThreats(0)){
-                if(color == "white") check = 0;
-                if(color == "black") check = 1; 
+            if(piece->getTile()->getThreats("white")){
+                check = 1; 
+            } else if (piece->getTile()->getThreats("black")) {
+                check = 0;
             } else {
                 check = -1;
             }

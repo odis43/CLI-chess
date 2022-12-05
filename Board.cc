@@ -197,7 +197,7 @@ void Board::run(vector<string> playerNames){
                 thePieces[i]->notifyObservers();
             }
 
-            if (checkState()) {
+            if ((checkState() == -1) || (checkState() == 0 && playerTurn != "white") || (checkState() == 1 && playerTurn != "black")) {
                 if (playerTurn == "white") {
                     playerTurn = "black";
                 } else if (playerTurn == "black") {
