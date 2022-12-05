@@ -152,8 +152,22 @@ void Board::run(vector<string> playerNames){
 
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->setTracker(i);
-        thePieces[i]->createValidMoves();
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
+        if (thePieces[i]->getVal() != 10){
+            thePieces[i]->createValidMoves();
+        }
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->notifyObservers();
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
+        if (thePieces[i]->getVal() == 10){
+            thePieces[i]->createValidMoves();
+        }
     }
 
     // Connects each tile to a piece
@@ -192,9 +206,19 @@ void Board::run(vector<string> playerNames){
             prevMoves.emplace_back(unique_ptr<Move>{currMove});
 
             for (int i = 0; i < (int) thePieces.size(); i++){
-                thePieces[i]->setTracker(i);
-                thePieces[i]->createValidMoves();
+                if (thePieces[i]->getVal() != 10){
+                    thePieces[i]->createValidMoves();
+                }
+            }
+
+            for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->notifyObservers();
+            }
+
+            for (int i = 0; i < (int) thePieces.size(); i++){
+                if (thePieces[i]->getVal() == 10){
+                    thePieces[i]->createValidMoves();
+                }
             }
 
             if ((checkState() == -1) || (checkState() == 0 && playerTurn != "white") || (checkState() == 1 && playerTurn != "black")) {

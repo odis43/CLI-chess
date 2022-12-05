@@ -110,7 +110,9 @@ Tile* Piece::getRandomMove(){
 
 void Piece::castlingStatus(){}
 
-bool Piece::getCastlingStatus() { return false; }
+bool Piece::getCastlingStatus() { 
+    return false; 
+}
 
 void Piece::createUniqueStatus() {
     castlingStatus();
@@ -119,7 +121,9 @@ bool Piece::receiveUniqueStatus() {
     return getCastlingStatus();
 }
 
-bool Piece::getStatus() {return false;}
+bool Piece::getStatus() {
+    return false;
+}
 
 void Piece::notifyObservers(){
     /*

@@ -47,11 +47,11 @@ void Tile::notify() {
         status = 0;
     }
 
-    if(piece->getColour() == "black") {
+    if(piece->getColour() == "white") {
         status = 1;
     }
 
-    if(piece->getColour() == "white"){
+    if(piece->getColour() == "black"){
         status = 2;
     }
 
@@ -60,22 +60,21 @@ void Tile::notify() {
         if(piece->getVal() == 1){
             if(piece->getColour() == "black"){
                 if (piece->getTile()->getRow() == this->row - 1 && (piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1)) {
-                if(numThreats.count("black")) {
-                    numThreats["black"]++;
-                } else {
-                    numThreats["black"] = 1;
-                }
-            }   
+                    if(numThreats.count("black")) {
+                        numThreats["black"]++;
+                    } else {
+                        numThreats["black"] = 1;
+                    }
+                }   
             } else if(piece->getColour() == "white"){
                 if (piece->getTile()->getRow() == this->row + 1 && (piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1)) {
                     if(numThreats.count("white")) {
                         numThreats["white"]++;
                     } else {
                         numThreats["white"] = 1;
-                }
-            } 
-        }
-
+                    }
+                } 
+            }
         } else if(piece->isValidMove(this)) {
             string curr = piece->getColour();
 
@@ -85,8 +84,7 @@ void Tile::notify() {
                 numThreats[curr] = 1;
             } 
         }    
-}
-
+    }
 }
 
 Piece* Tile::getPiece() {
