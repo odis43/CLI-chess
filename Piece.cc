@@ -126,7 +126,7 @@ bool Piece::getStatus() {
 }
 
 void Piece::notifyObservers(){
-    /*
+    
     vector<vector<Tile*>> tiles = theBoard->getBoardRef();
     for (auto theRow:tiles) {
         for (auto theTile:theRow) {
@@ -134,5 +134,5 @@ void Piece::notifyObservers(){
         }
     }
     theBoard->notify();
-    */
+    
 }

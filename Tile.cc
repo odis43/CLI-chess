@@ -43,12 +43,13 @@ int Tile::getThreats(string p) {
 }
 void Tile::notify() {
     //implementation to notify all pieces of cell changes
-    if(!piece) {
+    if(piece == nullptr) {
         status = 0;
+        return;
     }
 
     if(piece->getColour() == "white") {
-        status = 1;
+        status = 1; 
     }
 
     if(piece->getColour() == "black"){
@@ -86,7 +87,7 @@ void Tile::notify() {
     }
 }
 
-Piece* Tile::getPiece() {
+Piece* Tile::getPiece() {   
     return this->piece;
 }
 
