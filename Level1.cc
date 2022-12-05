@@ -37,6 +37,7 @@ std::vector<int> Level1::moveCreate() {
                 }
             }
 
+            srand(time(0));
             int randomVal = rand() % myPieces.size(); // generate a random value within the number of pieces in myPieces
             cout << randomVal << endl;
             Piece *chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal
