@@ -440,7 +440,7 @@ bool Chess::gameOver(){
             cout << "Black is in checkmate" << endl;
         }
 
-        for (int i = 0;i < getNumPlayers(); i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             if(i != checkmate) { //skips player that got checkmated
                 if (i == 0) updateScore("white", 1);
                 if (i == 1) updateScore("black", 1);
@@ -478,7 +478,7 @@ int Chess::checkState(){
         cout <<"White is in Check" << endl;
     }
 
-    if(check == 1) {
+    if (check == 1) {
         cout << "Black is in Check" << endl;
     }
 
@@ -491,15 +491,15 @@ void Chess::notify(){
     for(auto piece : pieces){
         if(piece->getVal() == 10) {
             string color = piece->getColour();
-            if(piece->getTile()->getThreats(0)){
-                if(color == "white") check = 0;
-                if(color == "black") check = 1; 
+            if(piece->getTile()->getThreats("white")){
+                check = 1; 
+            } else if (piece->getTile()->getThreats("black")) {
+                check = 0;
             } else {
                 check = -1;
             }
 
-    //checkmate check!!!
-            if(check != -1) {
+            if(check != -1) { //checkmate check!!!
                 bool noMove;
                 for(auto p : piece->getValidMoves()) {
                     if(p.second != 3) {

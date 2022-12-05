@@ -50,7 +50,7 @@ class Board: public Observer {
         void setBoard(int row, int col);
         void setPiece(int row, int col, Piece *piece);
         Piece *getPiece(int tracker) const;
-        vector<Piece*> getPiecesRef() const;
+        vector<Piece*> getPiecesRef();
         void addPlayer(Player *thePlayer);
         Player *getPlayer(int num) const;
         int getNumPlayers() const;
@@ -64,7 +64,7 @@ class Board: public Observer {
     public:
         Board();
         virtual ~Board() = 0;
-        vector<vector<Tile*>> getBoardRef() const;
+        vector<vector<Tile*>> getBoardRef();
         bool resign();
         virtual void setup() = 0;
         void run(vector<string> playerNames);

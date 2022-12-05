@@ -16,7 +16,7 @@ void Board::setBoard(int row, int col) {
     for (int i = 0; i < row; ++i) {
         vector<unique_ptr<Tile>> theRow;
         for (int j = 0; j < col; ++j) {
-            theRow.emplace_back(make_unique<Tile>(i,j));
+            theRow.emplace_back(unique_ptr<Tile>{new Tile(i,j)});
         }
         theBoard.emplace_back(move(theRow));
     }
@@ -38,6 +38,9 @@ void Board::setPiece(int row, int col, Piece* piece){
 }
 
 Piece* Board::getPiece(int tracker) const {
+    if (tracker == -1) {
+        return nullptr;
+    }
     for (auto &thePiece:thePieces) {
         if (thePiece->getTracker() == tracker) {
             return thePiece.get();
@@ -46,7 +49,7 @@ Piece* Board::getPiece(int tracker) const {
     return nullptr;
 }
 
-vector<vector<Tile*>> Board::getBoardRef() const {
+vector<vector<Tile*>> Board::getBoardRef() {
     vector<vector<Tile*>> boardRef;
     for (int i = 0; i < (int) theBoard.size(); ++i) {
         vector<Tile*> rowRef;
@@ -58,7 +61,7 @@ vector<vector<Tile*>> Board::getBoardRef() const {
     return boardRef;
 }
 
-vector<Piece*> Board::getPiecesRef() const {
+vector<Piece*> Board::getPiecesRef() {
     vector<Piece*> pieces;
     for (int i = 0; i < (int) thePieces.size(); i++) {
         Piece* thePiece = thePieces.at(i).get();
@@ -152,14 +155,28 @@ void Board::run(vector<string> playerNames){
 
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->setTracker(i);
-        thePieces[i]->createValidMoves();
-        thePieces[i]->notifyObservers();
     }
 
     // Connects each tile to a piece
     for (int i = 0; i < (int) theBoard.size(); i++){
         for (int j = 0; j < (int) theBoard.at(i).size(); j++){
             theBoard[i][j]->setAll(getPiecesRef());
+        }
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
+        if (thePieces[i]->getVal() != 10){
+            thePieces[i]->createValidMoves();
+        }
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
+        thePieces[i]->notifyObservers();
+    }
+
+    for (int i = 0; i < (int) thePieces.size(); i++){
+        if (thePieces[i]->getVal() == 10){
+            thePieces[i]->createValidMoves();
         }
     }
 
@@ -192,12 +209,21 @@ void Board::run(vector<string> playerNames){
             prevMoves.emplace_back(unique_ptr<Move>{currMove});
 
             for (int i = 0; i < (int) thePieces.size(); i++){
-                thePieces[i]->setTracker(i);
-                thePieces[i]->createValidMoves();
+                if (thePieces[i]->getVal() != 10){
+                    thePieces[i]->createValidMoves();
+                }
+            }
+            for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->notifyObservers();
             }
 
-            if (checkState()) {
+            for (int i = 0; i < (int) thePieces.size(); i++){
+                if (thePieces[i]->getVal() == 10){
+                    thePieces[i]->createValidMoves();
+                }
+            }
+
+            if ((checkState() == -1) || (checkState() == 0 && playerTurn != "white") || (checkState() == 1 && playerTurn != "black")) {
                 if (playerTurn == "white") {
                     playerTurn = "black";
                 } else if (playerTurn == "black") {

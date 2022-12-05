@@ -23,15 +23,15 @@ void Tile::remove() {
 }
 
 int Tile::getStat() {
-    return this->status; //will be added later 
+    return status; //will be added later 
 }
 
 int Tile::getRow() {
-    return this->row;
+    return row;
 }
 
 int Tile::getCol() {
-    return this->col;
+    return col;
 }
 
 int Tile::getThreats(string p) {
@@ -47,11 +47,11 @@ void Tile::notify() {
         status = 0;
     }
 
-    if(piece->getColour() == "black") {
+    if(piece->getColour() == "white") {
         status = 1;
     }
 
-    if(piece->getColour() == "white"){
+    if(piece->getColour() == "black"){
         status = 2;
     }
 
@@ -59,34 +59,31 @@ void Tile::notify() {
     for(auto piece: pieces) {
         if(piece->getVal() == 1){
             if(piece->getColour() == "black"){
-                if (piece->getTile()->getRow() == this->row - 1 && (piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1)) {
-                if(numThreats.count("black")) {
-                    numThreats["black"]++;
-                } else {
-                    numThreats["black"] = 1;
-                }
-            }   
+                if (piece->getTile()->getRow() == row - 1 && (piece->getTile()->getCol() == col - 1 || piece->getTile()->getCol() == col + 1)) {
+                    if(numThreats.count("black")) {
+                        numThreats["black"]++;
+                    } else {
+                        numThreats["black"] = 1;
+                    }
+                }   
             } else if(piece->getColour() == "white"){
-                if (piece->getTile()->getRow() == this->row + 1 && (piece->getTile()->getCol() == this->col - 1 || piece->getTile()->getCol() == col + 1)) {
+                if (piece->getTile()->getRow() == row + 1 && (piece->getTile()->getCol() == col - 1 || piece->getTile()->getCol() == col + 1)) {
                     if(numThreats.count("white")) {
                         numThreats["white"]++;
                     } else {
                         numThreats["white"] = 1;
-                }
-            } 
-        }
-
+                    }
+                } 
+            }
         } else if(piece->isValidMove(this)) {
             string curr = piece->getColour();
-
             if(numThreats.count(curr)) {
                 numThreats[curr]++;
             } else{
                 numThreats[curr] = 1;
             } 
         }    
-}
-
+    }
 }
 
 Piece* Tile::getPiece() {
