@@ -7,7 +7,6 @@
 #include "Knight.h"
 #include "Queen.h"
 #include "AI.h"
-//#include rest of what we need when it is done
 #include "Move.h"
 #include <stdexcept>
 #include <unordered_map>
