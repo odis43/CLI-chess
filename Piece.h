@@ -3,6 +3,7 @@
 
 #include<iostream>
 #include<map>
+#include<unordered_map>
 #include<vector>
 #include "Subject.h"
 using namespace std;
@@ -16,7 +17,7 @@ class Piece: public Subject {
     int tracker;
     bool notMoved;
     int val;
-    map<Tile*, int> validMoves;
+    unordered_map<Tile*, int> validMoves;
     Board* theBoard;
 
     virtual void genMoves(vector<vector<Tile*>> board, Tile* tile, int row, int col) = 0;
@@ -38,7 +39,7 @@ class Piece: public Subject {
         int getVal();
         int isValidMove(Tile* tile);
         void printThePiece();
-        map<Tile*, int>getValidMoves();
+        unordered_map<Tile*, int>getValidMoves();
         void createValidMoves();
         void updateValidMoves(Tile* tile, int num);
         void setNotMoved(bool b);

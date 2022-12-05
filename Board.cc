@@ -169,7 +169,6 @@ void Board::run(vector<string> playerNames){
 
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->notifyObservers();
-        cout << "test1" << endl;
     }
 
     for (int i = 0; i < (int) thePieces.size(); i++){
