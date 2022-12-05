@@ -441,7 +441,7 @@ bool Chess::gameOver(){
             cout << "Black is in checkmate" << endl;
         }
 
-        for (int i = 0;i < getNumPlayers(); i++) {
+        for (int i = 0; i < getNumPlayers(); i++) {
             if(i != checkmate) { //skips player that got checkmated
                 if (i == 0) updateScore("white", 1);
                 if (i == 1) updateScore("black", 1);
@@ -479,7 +479,7 @@ int Chess::checkState(){
         cout <<"White is in Check" << endl;
     }
 
-    if(check == 1) {
+    if (check == 1) {
         cout << "Black is in Check" << endl;
     }
 
