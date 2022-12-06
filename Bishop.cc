@@ -102,3 +102,4 @@ void Bishop::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col)
 
 void Bishop::castlingStatus(){}
 bool Bishop::getCastlingStatus() { return false; }
+
