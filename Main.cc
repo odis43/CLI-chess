@@ -7,7 +7,7 @@
 using namespace std;
 
 int main(){
-    bool emptyExit = true;
+    bool earlyExit = true;
     bool setupDone = false;
     string s;
     Chess *game = new Chess();
@@ -19,7 +19,7 @@ int main(){
         istringstream iss{s};
         iss >> command;
         if (command == "game") {
-            emptyExit = false;
+            earlyExit = false;
             vector<string> playerNames;
             string playerName;
             while (iss >> playerName){
@@ -32,7 +32,7 @@ int main(){
                 theGame->run(playerNames);
             }
         } else if (command == "setup") {
-            emptyExit = false;
+            earlyExit = false;
             setupDone = true;
             bool done = theGame->setup();
             if(done) {
@@ -49,12 +49,11 @@ int main(){
             }   
             }
         } else if (command == "quit") {
-            emptyExit = false;
             break;
         }
     }
 
-    if(!theGame) {
+    if(!earlyExit) {
         theGame->printScore();
     }
 
