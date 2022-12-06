@@ -140,19 +140,15 @@ bool Board::resign(){
 }
 
 void Board::run(vector<string> playerNames){
+    resetGame();
     inPlay = true;
-    if (playerNames.size() == 0) {
-        theTextDisplay->printBoard();
-    } else {
-        resetGame();
-        inPlay = true;
-        createPlayers(playerNames);
-        initGame();
-        theScore.push_back(0);
-        theScore.push_back(0);
-        theTextDisplay->printBoard();
-    }
+    createPlayers(playerNames);
+    initGame();
+    theScore.push_back(0);
+    theScore.push_back(0);
+    theTextDisplay->printBoard();
 
+    //Gives each piece a unique id
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->setTracker(i);
     }
@@ -164,16 +160,19 @@ void Board::run(vector<string> playerNames){
         }
     }
 
+    // Creates valid moves for all pieces expect for the Kings
     for (int i = 0; i < (int) thePieces.size(); i++){
         if (thePieces[i]->getVal() != 10){
             thePieces[i]->createValidMoves();
         }
     }
 
+    // Notifies the pieces observers
     for (int i = 0; i < (int) thePieces.size(); i++){
         thePieces[i]->notifyObservers();
     }
 
+    // Creates valid moves for the Kings
     for (int i = 0; i < (int) thePieces.size(); i++){
         if (thePieces[i]->getVal() == 10){
             thePieces[i]->createValidMoves();
@@ -208,15 +207,19 @@ void Board::run(vector<string> playerNames){
             Move* currMove = new Move(prevPiece, curPiece, initialTile, destTile, round);
             prevMoves.push_back(unique_ptr<Move>{currMove});
 
+            // Creates valid moves for all pieces expect for the Kings
             for (int i = 0; i < (int) thePieces.size(); i++){
                 if (thePieces[i]->getVal() != 10){
                     thePieces[i]->createValidMoves();
                 }
             }
+
+            // Notifies the pieces observers
             for (int i = 0; i < (int) thePieces.size(); i++){
                 thePieces[i]->notifyObservers();
             }
 
+            // Creates valid moves for the Kings
             for (int i = 0; i < (int) thePieces.size(); i++){
                 if (thePieces[i]->getVal() == 10){
                     thePieces[i]->createValidMoves();
