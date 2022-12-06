@@ -229,8 +229,6 @@ void Chess::initGame(){
     numEachPiece.find("BP")->second = 8;
 
     pieces = getPiecesRef();
-    TextDisplay *dis = getTextDisplay();
-    dis->printBoard();
 
 }
 
@@ -284,12 +282,13 @@ void Chess::modifyPos(char ch, string col, int val) {
     }
 }
 
-void Chess::setup(){
+bool Chess::setup(){
     TextDisplay *dis = getTextDisplay();
-    if (getNumPlayers() == 0) {
-        cout << "no game was playing" << endl; // no game was playing
+    if (getNumPlayers() == 0) { //if no players 
         createPlayers({"human", "human"});
-        initGame(); // initialize a chess board
+        initGame();
+        cout << "For your own reference!" << endl; 
+        dis->printBoard();
     } else {
         dis->printBoard();
     }
@@ -358,7 +357,8 @@ void Chess::setup(){
         }
         dis->printBoard();
     }
-    cout << "Setup Done" << endl;
+    cout << "Setup Done!" << endl;
+    return true; 
 }
 
 void Chess::createPlayers(std::vector<std::string> names){

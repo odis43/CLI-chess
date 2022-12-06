@@ -20,7 +20,7 @@ class Chess : public Board {
         Chess();
         ~Chess();
         void initGame();
-        void setup();
+        bool setup();
         void createPlayers(std::vector<std::string> names);
         void winner(int l);
         bool gameOver();

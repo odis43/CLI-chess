@@ -79,7 +79,7 @@ class Board: public Observer {
         //Check if the player resigned
         bool resign();
         //Setup board for setup mode
-        virtual void setup() = 0;
+        virtual bool setup() = 0;
         //Runs game
         void run(vector<string> playerNames);
         //Gets text display

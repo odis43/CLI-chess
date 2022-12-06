@@ -31,7 +31,20 @@ int main(){
             }
         } else if (command == "setup") {
             setupDone = true;
-            theGame->setup();
+            bool done = theGame->setup();
+            if(done) {
+            vector<string> playerNames;
+            string playerName;
+            while (iss >> playerName){
+                playerNames.emplace_back(playerName);
+            }
+
+            if(playerNames.size() != 2 && setupDone == false) {
+                cerr << "ERROR: please enter two players!" << endl;
+            } else {
+                theGame->run(playerNames);
+            }   
+            }
         } else if (command == "quit") {
             break;
         }
