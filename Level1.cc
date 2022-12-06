@@ -37,7 +37,11 @@ std::vector<int> Level1::moveCreate() {
                     }
                 }
             }
-            
+
+            if (myPieces.size() == 0) { // check if myPieces even has any pieces
+                return vector<int>(); // return empy vector if not
+            } 
+
             while (1) {
                 int randomVal = rand() % myPieces.size(); // generate a random value within the number of pieces in myPieces
                 Piece *chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal

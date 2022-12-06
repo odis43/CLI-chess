@@ -115,12 +115,9 @@ void Chess::Castle(Piece *p) {
     int row = p->getTile()->getRow();
     int col = p->getTile()->getCol();
     if(row == 7 && col == 6) { //white king 
-        cout << "here" << endl;
         Tile *rookCell = board[7][7];
         Tile *newRookCell = board[7][5];
         Piece *rook = board[7][7]->getPiece(); //pointer to rook piece 
-        cout << rook->getNotMoved() << endl;
-
         if(rook != nullptr && rook->getNotMoved()) {
             cout << "YES" << endl;
             rookCell->remove();
@@ -192,7 +189,7 @@ void Chess::initGame(){
     numEachPiece.find("BK")->second = 1;
 
     //set the Queens (slay)
-    /*setPiece(7,3,new Queen("white"));
+    setPiece(7,3,new Queen("white"));
     numEachPiece.find("WQ")->second = 1;
     setPiece(0,3,new Queen("black"));
     numEachPiece.find("BQ")->second = 1;
@@ -211,7 +208,7 @@ void Chess::initGame(){
     numEachPiece.find("WKN")->second = 2;
     setPiece(0, 1, new Knight("black")); 
     setPiece(0, 6, new Knight("black")); 
-    numEachPiece.find("BKN")->second = 2;*/
+    numEachPiece.find("BKN")->second = 2;
 
     //set rooks
     setPiece(7, 0, new Rook("white")); 
@@ -497,8 +494,7 @@ void Chess::notify(){
     for(auto piece : pieces){
         if(piece->getVal() == 10) { //king
             string color = piece->getColour();
-            
-            if(piece->receiveUniqueStatus()) {
+            if(!piece->receiveUniqueStatus()) {
                 Castle(piece);
             }        
             if (color == "white") { //king piece is white

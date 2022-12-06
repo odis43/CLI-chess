@@ -88,6 +88,8 @@ vector<int> Human::moveCreate() {
                     return vector<int>{0, currentPiece->getTracker(), initialRow, initialCol, destinationRow, destinationCol};
                 }
 
+                break; // to end the while loop
+
             } catch (const out_of_range &e) {
                 cerr << "Invalid Move. " << e.what() << endl;
             }
