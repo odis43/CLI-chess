@@ -2,31 +2,43 @@
 #include<iostream>
 #include<string>
 #include "Board.h"
+#include <memory>
 #include "Chess.h"
 using namespace std;
 
 int main(){
+    bool setupDone = false;
     string s;
-    auto chessGame = make_unique<Chess>();
+    Chess *game = new Chess();
+    auto theGame = unique_ptr<Chess>{game};
     cout << "Welcome to Chess!" << endl;
     cout << "Please enter 'game human human', 'setup', or 'quit'" << endl;
     while (getline(cin, s)) {
         string command;
-        istringstream ss{s};
-        ss >> command;
+        istringstream iss{s};
+        iss >> command;
         if (command == "game") {
             vector<string> playerNames;
             string playerName;
-            while (ss >> playerName){
+            while (iss >> playerName){
                 playerNames.emplace_back(playerName);
             }
-            
-            chessGame->run(playerNames);
+
+            if(playerNames.size() != 2 && setupDone == false) {
+                cerr << "ERROR: please enter two players!" << endl;
+            } else {
+                theGame->run(playerNames);
+            }
         } else if (command == "setup") {
-            chessGame->setup();
+            setupDone = true;
+            theGame->setup();
         } else if (command == "quit") {
             break;
         }
     }
-    chessGame->printScore();
+
+    if(theGame) {
+        theGame->printScore();
+    }
+
 }

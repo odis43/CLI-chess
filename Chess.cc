@@ -119,7 +119,6 @@ void Chess::Castle(Piece *p) {
         Tile *newRookCell = board[7][5];
         Piece *rook = board[7][7]->getPiece(); //pointer to rook piece 
         if(rook != nullptr && rook->getNotMoved()) {
-            cout << "YES" << endl;
             rookCell->remove();
             newRookCell->set(rook);
             Move *move = new Move(nullptr, rook, rookCell, newRookCell, getRound());
@@ -228,6 +227,11 @@ void Chess::initGame(){
         setPiece(1,i,new Pawn("black"));
     }
     numEachPiece.find("BP")->second = 8;
+
+    pieces = getPiecesRef();
+    TextDisplay *dis = getTextDisplay();
+    dis->printBoard();
+
 }
 
 //helper function to create pieces for us
@@ -244,47 +248,34 @@ Piece *returnPiece(char p) {
     if(p == 'n') return new Knight("black");
     if(p == 'P') return new Pawn("white");
     if(p == 'p') return new Pawn("black");
-    else return nullptr;
+    return nullptr;
 }
 
 //Another helper for setup (get the number from e1 for eg)
 vector<int> numPos(string position) {
     int row = 8 - stoi(position.substr(1));
     int col = position[0] - 97;
-    vector<int> numpos = {row, col};
+    vector<int> numpos{row, col};
     return numpos;
 }
 
 //helper to modify pos
 void Chess::modifyPos(char ch, string col, int val) {
     string piece;
-    switch(val) {
-        case 1:
-            piece = "WP";
-            break;
-        case 3:
-            piece = "WKN";
-            break;
-        case 4:
-            piece = "WB";
-            break;
-        case 5:
-            piece = "WR";
-            break;
-        case 9:
-            piece = "WQ";
-            break;
-        case 10:
-            piece = "WK";
-            break;
-    }
-    if (col == "white") {
-        if (piece == "WP") piece = "BP";
-        if (piece == "WKN") piece = "BKN";
-        if (piece == "WB") piece = "BW";
-        if (piece == "WR") piece = "BR";
-        if (piece == "WQ") piece = "BQ";
-        if (piece == "WK") piece = "BK";
+    if(col == "white") {
+        if(val == 1) piece = "WP";
+        if(val == 3) piece = "WKN";
+        if(val == 4) piece = "WB";
+        if(val == 5) piece = "WR";
+        if(val == 9) piece = "WQ";
+        if(val == 10) piece = "WK";
+    } else if (col == "black") {
+        if(val == 1) piece = "BP";
+        if(val == 3) piece = "BKN";
+        if(val == 4) piece = "BB";
+        if(val == 5) piece = "BR";
+        if(val == 9) piece = "BQ";
+        if(val == 10) piece = "BK";
     }
     if (ch == '+') {
         numEachPiece.find(piece)->second += 1;
@@ -295,44 +286,37 @@ void Chess::modifyPos(char ch, string col, int val) {
 
 void Chess::setup(){
     TextDisplay *dis = getTextDisplay();
-    if(getNumPlayers() == 0) {
+    if (getNumPlayers() == 0) {
+        cout << "no game was playing" << endl; // no game was playing
         createPlayers({"human", "human"});
-        initGame();
-    }
-
-    else {
+        initGame(); // initialize a chess board
+    } else {
         dis->printBoard();
     }
-
-    string str;
+    string s;
     vector<vector<Tile*>> board = getBoardRef();
-    while(getline(cin,str)) {
-        istringstream iss{str};
+    while (getline(cin, s)) { 
+        istringstream iss{s};
         string command;
         iss >> command;
-        //add the pieces
-        if(command == "+") { 
+        if (command == "+") { 
             char piece;
             string position;
             iss >> piece >> position;
             Piece *p = returnPiece(piece);
             try {
-                if(p) {
-                    //set the piece on the board using numPos
+                if (p) {
                     if (!board[numPos(position)[0]][numPos(position)[1]]) {
                         Piece *old = board[numPos(position)[0]][numPos(position)[1]]->getPiece();
-                        modifyPos('-',old->getColour(), old->getVal());
+                        modifyPos('-', old->getColour(), old->getVal());
                     }
-
                     setPiece(numPos(position)[0], numPos(position)[1], p);
                     modifyPos('+', p->getColour(), p->getVal());
                 }
             } catch (...) {
                 cerr << "Bad Piece" << endl;
             }
-        }
-
-        if(command == "-") {
+        } else if (command == "-") { // removes piece
             try {
                 string position;
                 iss >> position;
@@ -342,20 +326,20 @@ void Chess::setup(){
                     modifyPos('-', p->getColour(), p->getVal());
                 }
             } catch (...) {
-                cerr << "Bad Piece" << endl;
+                cerr << "Bad piece" << endl;
             }
-        }
-
-        if(command == "=") {
+        } else if (command == "=") { // sets turn
             string color;
             iss >> color;
-            if(color == "white") setPlayerTurn("white");
-            if(color == "black") setPlayerTurn("black");
-            else cerr << "Bad input" << endl;
-        }
-
-        if(command == "done") {
-            bool pawnOnBack;
+            if (color == "white") {
+                setPlayerTurn("white");
+            } else if (color == "black") {
+                setPlayerTurn("black");
+            } else {
+                cerr << "Bad piece" << endl;
+            }
+        } else if(command == "done") {
+            bool pawnOnBack = false;
             for (int i = 0; i < 8;i++) {
                 if(board.at(0).at(i)->getPiece() != nullptr && board.at(0).at(i)->getPiece()->getVal() == 1) pawnOnBack = true;
             }
@@ -364,25 +348,17 @@ void Chess::setup(){
                 if(board.at(7).at(i)->getPiece() != nullptr && board.at(7).at(i)->getPiece()->getVal() == 1) pawnOnBack = true;
             }
 
-            pawnOnBack = false;
-
             if(numEachPiece.find("WK")->second != 1 || numEachPiece.find("BK")->second != 1) {
                 cerr << "Must have exactly one King at each color" << endl;
-            }
-
-            if (pawnOnBack) {
+            } else if (pawnOnBack) {
                 cerr << "No pawns on back row" << endl;
-            }
-
-            else {
+            } else {
                 break;
             }
         }
-
         dis->printBoard();
     }
-
-    cout << "Setup done" << endl;
+    cout << "Setup Done" << endl;
 }
 
 void Chess::createPlayers(std::vector<std::string> names){
