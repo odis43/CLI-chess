@@ -33,7 +33,7 @@ std::vector<int> Level1::moveCreate() {
                     Piece *myPiece = curBoard.at(i).at(j)->getPiece(); // get each piece in the board
                     
                     if (myPiece && myPiece->getColour() == getColour() && myPiece->getValidMoves().size() != 0) { // if belonging to my colour and existent
-                        myPieces.emplace_back(myPiece); // add to my list of available pieces to move
+                        myPieces.push_back(myPiece); // add to my list of available pieces to move
                     }
                 }
             }
@@ -72,9 +72,19 @@ std::vector<int> Level1::moveCreate() {
                     // if no valid move is provided
                     cerr << "Invalid Move. " << e.what() << endl;
                 }
+
+                delete initialTile;
+                delete destinationTile;
+                
             }
+
+            for (auto p : myPieces) { // delete myPieces, no longer need to store the memory
+                delete p;
+            }
+
+            myPieces.clear(); // and clear it after
         }
     }
-    return vector<int>();
+    return vector<int>(); // provide an empty vector
 }
 
