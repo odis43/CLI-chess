@@ -75,17 +75,7 @@ std::vector<int> Level1::moveCreate() {
                     // if no valid move is provided
                     cerr << "Invalid Move. " << e.what() << endl;
                 }     
-
-                delete initialTile;
-                delete destinationTile;
-
             }
-
-            for (auto p : myPieces) { // delete myPieces, no longer need to store the memory
-                delete p;
-            }
-
-            myPieces.clear(); // and clear it after
         }
     }
     return vector<int>(); // provide an empty vector
