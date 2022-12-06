@@ -3,7 +3,7 @@
 #include "Board.h"
 using namespace std;
 
-King::King(string colour): Piece{colour, 10},castle{false}{}
+King::King(string colour): Piece{colour, 10}, castle{false}{}
 
 King::~King(){}
 
@@ -117,3 +117,5 @@ void King::castlingStatus(){
 bool King::getCastlingStatus(){
     return castle;
 }
+
+

@@ -107,11 +107,8 @@ Tile* Piece::getRandomMove(){
     return randomMove;
 }
 
-
-void Piece::castlingStatus(){}
-
-bool Piece::getCastlingStatus() { 
-    return false; 
+bool Piece::getStatus() {
+    return false;
 }
 
 void Piece::createUniqueStatus() {
@@ -119,10 +116,6 @@ void Piece::createUniqueStatus() {
 }
 bool Piece::receiveUniqueStatus() {
     return getCastlingStatus();
-}
-
-bool Piece::getStatus() {
-    return false;
 }
 
 void Piece::notifyObservers(){
@@ -134,5 +127,4 @@ void Piece::notifyObservers(){
         }
     }
     theBoard->notify();
-    
 }

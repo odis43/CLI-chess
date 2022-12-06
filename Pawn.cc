@@ -60,6 +60,10 @@ void Pawn::setStatus() {
     hasTwoStepped = !hasTwoStepped;
 }
 
+void Pawn::castlingStatus(){}
+
+bool Pawn::getCastlingStatus(){return false;}
+
 void Pawn::print() {
     if(this->getColour() == "black"){
         cout << "p";
@@ -68,6 +72,5 @@ void Pawn::print() {
     }
 }
 
-void Pawn::castlingStatus(){}
-bool Pawn::getCastlingStatus() { return false; }
+
 
