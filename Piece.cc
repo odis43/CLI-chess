@@ -6,7 +6,7 @@
 #include "Tile.h"
 using namespace std;
 
-Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, tracker{-1}, notMoved{true}, val{val}, validMoves{unordered_map<Tile*, int>()}, theBoard{nullptr}{}
+Piece::Piece(string colour, int val): tile{nullptr}, colour{colour}, tracker{-1}, notMoved{true}, val{val}, validMoves{map<Tile*, int>()}, theBoard{nullptr}{}
 
 Piece::~Piece(){
     if (theBoard) {
@@ -79,7 +79,7 @@ bool Piece::getNotMoved(){
     return this->notMoved;
 }
 
-unordered_map<Tile*, int> Piece::getValidMoves(){
+map<Tile*, int> Piece::getValidMoves(){
     return this->validMoves;
 }
 
@@ -107,6 +107,24 @@ Tile* Piece::getRandomMove(){
     return randomMove;
 }
 
+Tile* Piece::getCapture(){
+    for (auto theMove:validMoves) {
+        if (theMove.second == 2) {
+            return theMove.first;
+        }
+    }
+    return nullptr;
+}
+
+Tile* Piece::getCheck(){
+    for(auto theMove:validMoves){
+        if (theMove.second == -1) {
+            return theMove.first;
+        }
+    }
+    return nullptr;
+}
+
 bool Piece::getStatus() {
     return false;
 }
@@ -119,7 +137,6 @@ bool Piece::receiveUniqueStatus() {
 }
 
 void Piece::notifyObservers(){
-    
     vector<vector<Tile*>> tiles = theBoard->getBoardRef();
     for (auto theRow:tiles) {
         for (auto theTile:theRow) {

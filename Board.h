@@ -47,28 +47,44 @@ class Board: public Observer {
     virtual void createPlayers(vector<string> playerNames) = 0;
 
     protected:
+        //Sets board based on row and col
         void setBoard(int row, int col);
+        //Sets piece to a tile
         void setPiece(int row, int col, Piece *piece);
+        //Gets a piece based on its tracker
         Piece *getPiece(int tracker) const;
+        //Gets a reference to the pieces
         vector<Piece*> getPiecesRef();
+        //Adds and gets a player
         void addPlayer(Player *thePlayer);
         Player *getPlayer(int num) const;
         int getNumPlayers() const;
-        void updateScore(string colour, float point);
+        //Gets and updates the score
         int getScore(string colour) const;
+        void updateScore(string colour, float point);
+        //Sets the turn
         void setPlayerTurn(string colour);
-        void addMove(Move *theMove);
+        //Gets the move and adds move to the previous moves
         Move *getMove(int num);
+        void addMove(Move *theMove);
+        //Gets the round
         int getRound() const;
 
     public:
+        //Ctor and dtor for board
         Board();
         virtual ~Board() = 0;
+        //Gets a reference for the board
         vector<vector<Tile*>> getBoardRef();
+        //Check if the player resigned
         bool resign();
+        //Setup board for setup mode
         virtual void setup() = 0;
+        //Runs game
         void run(vector<string> playerNames);
+        //Gets text display
         TextDisplay *getTextDisplay();
+        //Notify pieces for check and checkmate
         virtual void notify() = 0;
 };
 

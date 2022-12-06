@@ -20,6 +20,7 @@ std::vector<int> Level1::moveCreate() {
     srand(time(0)); // generate seed for rand()
     vector<vector<Tile *>> curBoard = getBoard()->getBoardRef(); // holds a reference to the board
     string input; // will store input provided
+
     while (getline(cin, input)) {
         istringstream iss(input); // converts string input into input stringstream
         string cmd;
@@ -68,13 +69,25 @@ std::vector<int> Level1::moveCreate() {
                         return vector<int>{0, chosenPiece->getTracker(), rowInitialTile, colInitialTile, rowDestinationTile, colDestinationTile};
                     }
 
+                    break;
+
                 } catch (const out_of_range &e) {
                     // if no valid move is provided
                     cerr << "Invalid Move. " << e.what() << endl;
-                }
+                }     
+
+                delete initialTile;
+                delete destinationTile;
+
             }
+
+            for (auto p : myPieces) { // delete myPieces, no longer need to store the memory
+                delete p;
+            }
+
+            myPieces.clear(); // and clear it after
         }
     }
-    return vector<int>();
+    return vector<int>(); // provide an empty vector
 }
 
