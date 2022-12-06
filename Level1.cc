@@ -71,11 +71,11 @@ std::vector<int> Level1::moveCreate() {
                 } catch (const out_of_range &e) {
                     // if no valid move is provided
                     cerr << "Invalid Move. " << e.what() << endl;
-                }
+                }     
 
                 delete initialTile;
                 delete destinationTile;
-                
+
             }
 
             for (auto p : myPieces) { // delete myPieces, no longer need to store the memory
