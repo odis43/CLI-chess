@@ -148,8 +148,8 @@ void Board::run(vector<string> playerNames){
         inPlay = true;
         createPlayers(playerNames);
         initGame();
-        theScore.emplace_back(0);
-        theScore.emplace_back(0);
+        theScore.push_back(0);
+        theScore.push_back(0);
         theTextDisplay->printBoard();
     }
 
@@ -206,7 +206,7 @@ void Board::run(vector<string> playerNames){
             Tile* initialTile = theBoard[theirMove[2]][theirMove[3]].get();
             Tile* destTile = theBoard[theirMove[4]][theirMove[5]].get();
             Move* currMove = new Move(prevPiece, curPiece, initialTile, destTile, round);
-            prevMoves.emplace_back(unique_ptr<Move>{currMove});
+            prevMoves.push_back(unique_ptr<Move>{currMove});
 
             for (int i = 0; i < (int) thePieces.size(); i++){
                 if (thePieces[i]->getVal() != 10){
