@@ -34,7 +34,7 @@ std::vector<int> Level1::moveCreate() {
                     Piece *myPiece = curBoard.at(i).at(j)->getPiece(); // get each piece in the board
                     
                     if (myPiece && myPiece->getColour() == getColour() && myPiece->getValidMoves().size() != 0) { // if belonging to my colour and existent
-                        myPieces.push_back(myPiece); // add to my list of available pieces to move
+                        myPieces.emplace_back(myPiece); // add to my list of available pieces to move
                     }
                 }
             }
