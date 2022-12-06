@@ -20,6 +20,7 @@ std::vector<int> Level1::moveCreate() {
     srand(time(0)); // generate seed for rand()
     vector<vector<Tile *>> curBoard = getBoard()->getBoardRef(); // holds a reference to the board
     string input; // will store input provided
+
     while (getline(cin, input)) {
         istringstream iss(input); // converts string input into input stringstream
         string cmd;
@@ -67,6 +68,8 @@ std::vector<int> Level1::moveCreate() {
                     } else {
                         return vector<int>{0, chosenPiece->getTracker(), rowInitialTile, colInitialTile, rowDestinationTile, colDestinationTile};
                     }
+
+                    break;
 
                 } catch (const out_of_range &e) {
                     // if no valid move is provided
