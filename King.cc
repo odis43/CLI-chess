@@ -122,3 +122,5 @@ bool King::getCastlingStatus(){
 void King::promoteStatus(){}
 bool King::getPromoteStatus(){return false;}
 
+
+

@@ -18,3 +18,5 @@ class Knight : public Piece {
 };
 
 #endif
+
+

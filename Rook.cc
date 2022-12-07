@@ -99,3 +99,5 @@ bool Rook::getCastlingStatus() { return false; }
 
 void Rook::promoteStatus(){}
 bool Rook::getPromoteStatus() { return false; }
+
+

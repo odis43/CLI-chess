@@ -18,3 +18,5 @@ class Queen: public Piece {
 };
 
 #endif
+
+

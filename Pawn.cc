@@ -80,3 +80,5 @@ void Pawn::promoteStatus(){
 bool Pawn::getPromoteStatus(){
     return isPromoted;
 }
+
+
