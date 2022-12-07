@@ -468,7 +468,7 @@ void Chess::notify(){
                 }
             }
 
-            if(check != -1) { //checkmate check!!!
+            if(check != -1) { //checkmate check!!! //THERE IS A CHECK, CHECK FORE CHECKMATE 
                 bool noMove = false;
                 for(auto p : piece->getValidMoves()) {
                     if(p.second != 3) {
