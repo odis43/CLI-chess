@@ -105,3 +105,5 @@ bool Bishop::getCastlingStatus() { return false; }
 
 void Bishop::promoteStatus(){}
 bool Bishop::getPromoteStatus() { return false; }
+
+
