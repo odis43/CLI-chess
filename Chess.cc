@@ -483,8 +483,6 @@ void Chess::notify(){
                         checkmate = 1;
                     }
                 }
-            } else {
-                checkmate = -1;
             } 
             //pawn check
         } else if (piece->getVal() == 1) {
