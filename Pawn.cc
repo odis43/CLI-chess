@@ -52,17 +52,18 @@ void Pawn::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col) {
 }
 
 bool Pawn::getStatus() {
-    return isPromoted && hasTwoStepped;
+    return hasTwoStepped;
 }
 
 void Pawn::setStatus() {
-    isPromoted = !isPromoted;
     hasTwoStepped = !hasTwoStepped;
 }
 
 void Pawn::castlingStatus(){}
 
 bool Pawn::getCastlingStatus(){return false;}
+
+
 
 void Pawn::print() {
     if(this->getColour() == "black"){
@@ -73,4 +74,9 @@ void Pawn::print() {
 }
 
 
-
+void Pawn::promoteStatus(){
+    isPromoted = !isPromoted;
+}
+bool Pawn::getPromoteStatus(){
+    return isPromoted;
+}

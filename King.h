@@ -17,6 +17,8 @@ class King: public Piece {
         void genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col);
         void castlingStatus();
         bool getCastlingStatus();
+        void promoteStatus();
+        bool getPromoteStatus();
 
 
 };

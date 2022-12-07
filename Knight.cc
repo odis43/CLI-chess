@@ -72,3 +72,7 @@ void Knight::print() {
 void Knight::castlingStatus(){}
 bool Knight::getCastlingStatus() { return false; }
 
+
+
+void Knight::promoteStatus(){}
+bool Knight::getPromoteStatus() { return false; }

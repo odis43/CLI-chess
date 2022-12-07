@@ -17,6 +17,8 @@ class Pawn : public Piece {
         void print() override;
         void castlingStatus();
         bool getCastlingStatus();
+        void promoteStatus();
+        bool getPromoteStatus();
 };
 
 #endif

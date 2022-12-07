@@ -96,3 +96,6 @@ void Rook::genMoves(std::vector<std::vector<Tile*>> board, Tile *tile, int row, 
 
 void Rook::castlingStatus(){}
 bool Rook::getCastlingStatus() { return false; }
+
+void Rook::promoteStatus(){}
+bool Rook::getPromoteStatus() { return false; }

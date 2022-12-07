@@ -17,6 +17,8 @@ class Rook : public Piece {
 
         void castlingStatus();
         bool getCastlingStatus();
+        void promoteStatus();
+        bool getPromoteStatus();
 };
 
 #endif

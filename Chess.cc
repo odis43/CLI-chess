@@ -21,7 +21,7 @@ Chess::~Chess(){}
 
 void Chess::pawnPromote(Piece *p) {
     vector<vector<Tile*>> board = getBoardRef();
-    if(p->getColour() == "white") {
+    if(p->getColour() == "white" && !p->receiveUniqueStatus()) {
         Tile *curr = p->getTile();
         Piece *newpiece;
         if(curr->getRow() == 0) {
@@ -33,26 +33,24 @@ void Chess::pawnPromote(Piece *p) {
                     newpiece = new Rook("white");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "B") {
+                } else if(str == "B") {
                     newpiece = new Bishop("white");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "N") {
+                } else if(str == "N") {
                     newpiece = new Knight("white");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "Q") {
+                } else if(str == "Q") {
                     newpiece = new Queen("white");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
+                } else {
+                    cout << "Please enter a valid piece (R,B,N,Q)" << endl;
                 }
             }
+
+            //casting
             for(int i = 0; i < (int) board.size(); i++) {
                 for(int j = 0; j < (int) board.at(i).size(); j++) {
                     board[i][j]->setAll(getPiecesRef());
@@ -63,9 +61,7 @@ void Chess::pawnPromote(Piece *p) {
             Move *move = new Move(p, newpiece, curr, curr, getRound());
             addMove(move);
         }
-    }
-
-    if(p->getColour() == "black") {
+    } else if(p->getColour() == "black" && !p->receiveUniqueStatus()) {
         Tile *curr = p->getTile();
         Piece *newpiece;
         if(curr->getRow() == 7) {
@@ -106,6 +102,7 @@ void Chess::pawnPromote(Piece *p) {
             newpiece->setTracker(getRound() + 32);
             Move *move = new Move(p, newpiece, curr, curr, getRound());
             addMove(move);
+            p->createUniqueStatus(); //to ensure this pawn is promoted
         }
     }
 }

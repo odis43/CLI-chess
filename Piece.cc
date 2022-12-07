@@ -131,11 +131,12 @@ bool Piece::getStatus() {
 
 void Piece::createUniqueStatus() {
     castlingStatus();
+    promoteStatus();
 
 }
 
 bool Piece::receiveUniqueStatus() {
-    return getCastlingStatus();
+    return getCastlingStatus() && getPromoteStatus();
 }
 
 void Piece::notifyObservers(){
