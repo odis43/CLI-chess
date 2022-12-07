@@ -50,16 +50,15 @@ void Chess::pawnPromote(Piece *p) {
                 }
             }
 
-            //casting
-            for(int i = 0; i < (int) board.size(); i++) {
-                for(int j = 0; j < (int) board.at(i).size(); j++) {
+            for (int i = 0;i < (int)board.size();i++) {
+                for(int j = 0;j < (int)board.at(i).size();j++) {
                     board[i][j]->setAll(getPiecesRef());
                 }
             }
-
             newpiece->setTracker(getRound() + 32);
-            Move *move = new Move(p, newpiece, curr, curr, getRound());
-            addMove(move);
+            Move *m = new Move(p, newpiece, curr, curr, getRound());
+            addMove(m);
+            p->createUniqueStatus();
         }
     } else if(p->getColour() == "black" && !p->receiveUniqueStatus()) {
         Tile *curr = p->getTile();
@@ -73,40 +72,34 @@ void Chess::pawnPromote(Piece *p) {
                     newpiece = new Rook("black");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "b") {
+                } else if(str == "b") {
                     newpiece = new Bishop("black");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "n") {
+                } else if(str == "n") {
                     newpiece = new Knight("black");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
-                }
-
-                if(str == "q") {
+                } else if(str == "q") {
                     newpiece = new Queen("black");
                     setPiece(curr->getRow(), curr->getCol(), newpiece);
                     break;
+                } else {
+                    cout << "Please enter a valid piece (r,b,n,q)" << endl;
                 }
             }
-            for(int i = 0; i < (int) board.size(); i++) {
-                for(int j = 0; j < (int) board.at(i).size(); j++) {
+            for (int i = 0;i < (int)board.size();i++) {
+                for(int j = 0;j < (int)board.at(i).size();j++) {
                     board[i][j]->setAll(getPiecesRef());
                 }
             }
-
             newpiece->setTracker(getRound() + 32);
-            Move *move = new Move(p, newpiece, curr, curr, getRound());
-            addMove(move);
-            p->createUniqueStatus(); //to ensure this pawn is promoted
+            Move *m = new Move(p, newpiece, curr, curr, getRound());
+            addMove(m);
+            p->createUniqueStatus();
+        }
         }
     }
-}
-
 void Chess::Castle(Piece *p) {
     vector<vector<Tile*>> board  = getBoardRef();
     int row = p->getTile()->getRow();

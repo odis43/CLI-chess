@@ -129,14 +129,22 @@ bool Piece::getStatus() {
     return false;
 }
 
-void Piece::createUniqueStatus() {
-    castlingStatus();
-    promoteStatus();
 
+//handles the prmotion of the pawn
+void Piece::createUniqueStatus() {
+    promoteStatus();
 }
 
 bool Piece::receiveUniqueStatus() {
-    return getCastlingStatus() && getPromoteStatus();
+    return getPromoteStatus();
+}
+
+void Piece::createUniqueStatusTwo() {
+    castlingStatus();
+}
+
+bool Piece::receiveUniqueStatusTwo() {
+    return getCastlingStatus();
 }
 
 void Piece::notifyObservers(){

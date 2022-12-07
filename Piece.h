@@ -30,7 +30,6 @@ class Piece: public Subject {
     virtual void promoteStatus() = 0;
     virtual bool getPromoteStatus() = 0;
     virtual bool getStatus();
-
     public:
         //Ctor and dtor for Piece
         Piece(string colour, int val);
@@ -72,6 +71,8 @@ class Piece: public Subject {
         //Creates and receive unique status
         void createUniqueStatus();
         bool receiveUniqueStatus();
+        void createUniqueStatusTwo();
+        bool receiveUniqueStatusTwo();
 };
 
 #endif
