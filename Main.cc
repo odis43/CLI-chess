@@ -46,7 +46,7 @@ int main(){
                 cerr << "ERROR: please enter two players!" << endl;
             } else {
                 theGame->run(playerNames);
-            }   
+                }   
             }
         } else if (command == "quit") {
             emptyExit = false;
