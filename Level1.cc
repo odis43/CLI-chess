@@ -44,7 +44,7 @@ std::vector<int> Level1::moveCreate() {
             } 
 
             while (1) {
-                int randomVal = rand() % myPieces.size(); // generate a random value within the number of pieces in myPieces
+                int randomVal = rand() % myPieces.size() - 1; // generate a random value within the number of pieces in myPieces
                 Piece *chosenPiece = myPieces.at(randomVal); // select the random piece with the given index from randomVal
 
                 Tile *initialTile = chosenPiece->getTile(); // this is the tile where the chosen piece is on
