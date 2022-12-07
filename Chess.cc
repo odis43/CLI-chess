@@ -397,29 +397,17 @@ bool Chess::gameOver(){
 
         cout << "Stalemate" << endl;
         return true;
-    }
-
-    if (checkmate != -1) {
+    } else if (checkmate != -1) {
         if(checkmate == 0) {
             cout << "White is in checkmate" << endl;
-        }
-
-        if(checkmate == 1) {
+            updateScore("black",1);
+        } else if(checkmate == 1) {
             cout << "Black is in checkmate" << endl;
+            updateScore("white",1);
         }
-
-        for (int i = 0; i < getNumPlayers(); i++) {
-            if(i != checkmate) { //skips player that got checkmated
-                if (i == 0) updateScore("white", 1);
-                if (i == 1) updateScore("black", 1);
-            }
-        }
-
-        winner(checkmate);
+        winner(!checkmate);
         return true;
-    }
-
-    else {
+    } else {
         this->resigned = resign();
             if (this->resigned != 0) {
                 for (int i = 0; i < getNumPlayers(); ++i) {
@@ -459,10 +447,13 @@ void Chess::notify(){
     pieces = getPiecesRef();
     for(auto piece : pieces){
         if(piece->getVal() == 10) { //king
+
             string color = piece->getColour();
+
             if(!piece->receiveUniqueStatus()) {
                 Castle(piece);
-            }        
+            }
+
             if (color == "white") { //king piece is white
                 if(piece->getTile()->getThreats("black")) {
                     check = 0;
@@ -478,21 +469,23 @@ void Chess::notify(){
             }
 
             if(check != -1) { //checkmate check!!!
-                bool noMove = true;
+                bool noMove = false;
                 for(auto p : piece->getValidMoves()) {
                     if(p.second != 3) {
-                        noMove = false;
+                        noMove = true;
+                        break;
                     }
                 }
                 if(noMove == true) {
-                    if(color == "white") checkmate = 0;
-                    if(color == "black") checkmate = 1; 
-                } else {
-                    checkmate = -1;
+                    if(color == "white") {
+                        checkmate = 0;
+                    } else if (color == "black") {
+                        checkmate = 1;
+                    }
                 }
             } else {
                 checkmate = -1;
-            }    
+            } 
             //pawn check
         } else if (piece->getVal() == 1) {
             if(piece->getTile()->getRow() == 0 || piece->getTile()->getRow() == 7) {
