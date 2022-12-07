@@ -405,7 +405,7 @@ bool Chess::gameOver(){
             cout << "Black is in checkmate" << endl;
             updateScore("white",1);
         }
-        winner(!checkmate);
+        winner(checkmate);
         return true;
     } else {
         this->resigned = resign();
@@ -483,7 +483,7 @@ void Chess::notify(){
                         checkmate = 1;
                     }
                 }
-            } 
+            }
             //pawn check
         } else if (piece->getVal() == 1) {
             if(piece->getTile()->getRow() == 0 || piece->getTile()->getRow() == 7) {
