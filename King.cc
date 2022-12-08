@@ -46,10 +46,10 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
     }
 
     for (auto move:possibleMoves) {
-        Piece *tilePiece = move->getPiece();
-        string theColour = getColour();
+        Piece *tilePiece = move->getPiece(); //get pieces at tiles in possibleMoves
+        string theColour = getColour(); //get curr piece color 
         if (tilePiece) {
-            if (tilePiece->getColour() != theColour) {
+            if (tilePiece->getColour() != theColour) { //tiles piece col diff from curr piece
                 if (theColour == "white") {
                     if (move->getThreats("black") == 0) {
                         updateValidMoves(move, 2);
@@ -70,7 +70,7 @@ void King::genMoves(vector<vector<Tile*>> board, Tile *tile, int row, int col){
                     }                   
                 }
             }
-        } else {
+        } else { //move to empty
             if (theColour == "white") {
                 if (move->getThreats("black") == 0) {
                     updateValidMoves(move, 1);
