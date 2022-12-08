@@ -61,7 +61,7 @@ std::vector<int> Level1::moveCreate() {
                     destinationTile->set(chosenPiece); // because our chosen piece will now live on the destination tile
                     chosenPiece->setTile(destinationTile); // because our chosen piece will belong to destination tile
                     chosenPiece->setNotMoved(false); // because piece has moved
-
+                    
                     // check for an existing captured piece and respond accordingly
                     if (previousPiece) {
                         return vector<int>{previousPiece->getTracker(), chosenPiece->getTracker(), rowInitialTile, colInitialTile, rowDestinationTile, colDestinationTile};
